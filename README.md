@@ -9,4 +9,4 @@
 * gem install -y bundler --user-install
 * sudo apt install ruby-bundler 
 * bundle update
-* 
+* make serve
