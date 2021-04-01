@@ -7,3 +7,6 @@
 * https://carpentries.github.io/lesson-example/setup.html
 * sudo apt-get install -y ruby ruby-dev build-essential libxml2-dev
 * gem install -y bundler --user-install
+* sudo apt install ruby-bundler 
+* bundle update
+* 
