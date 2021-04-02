@@ -1,9 +1,10 @@
 # WebServer
 
+## Setting up a Raspberry Pi with an operating system:
+* Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
+* Write image to SD card using rpi-imager
 
 ## Serving training materials with ```make serve```
-* Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
-* Write image to SD card using rpi-imager:
 * ```sudo apt-get update```
 * ```sudo apt-get install -y git```
 * https://carpentries.github.io/lesson-example/setup.html
