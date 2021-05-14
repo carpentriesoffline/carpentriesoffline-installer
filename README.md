@@ -10,7 +10,7 @@
 * https://carpentries.github.io/lesson-example/setup.html
 * ```sudo apt-get install -y ruby ruby-dev build-essential libxml2-dev```
 * ```gem install bundler --user-install```
-* ```sudo apt install ruby-bundler ```
+* ```sudo apt install -y ruby-bundler ```
 * ```bundle update```
 * for localhost testting: ```make serve```
 * build for web server: ```bundle exec jekyll build ```
