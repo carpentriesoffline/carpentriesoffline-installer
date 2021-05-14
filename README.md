@@ -31,3 +31,4 @@ gem 'github-pages', group: :jekyll_plugins
 * ```sudo apt-get -y install nginx```
 * ```mkdir /var/www/html/git-novice```
 * ```cp  -f <path-to-repository>/_setup/* /var/www/html/git-novice/.```
+
