@@ -17,7 +17,7 @@ source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 ```
 * ```bundle update```
-* for localhost testting: ```make serve```
+* for localhost testing: ```make serve```
 * build for web server: ```bundle exec jekyll build ```
 * Pages are now served from Pi server running nginx. Access with http://<ip-address>/git-novice/
 
