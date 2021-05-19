@@ -4,7 +4,7 @@
 
 ## Setting up a Raspberry Pi with an operating system:
 * Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
-* Write image to SD card using rpi-imager
+* Write image to SD card using rpi-imager: https://www.raspberrypi.org/software/
 
 ## Serving training materials with ```make serve```
 * ```sudo apt-get update```
