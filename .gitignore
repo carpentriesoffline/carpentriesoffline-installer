@@ -1,0 +1,6 @@
+data/
+out/
+target/
+*.iml
+system.properties
+
