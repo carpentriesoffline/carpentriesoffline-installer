@@ -10,7 +10,7 @@
 	 * ```tim.web```
 	 * ```tim.cran```
 * Apache2 needs the configuration file /etc/apache2/apache2.conf
-* For each of the virtual hosts we need a configuration file in /etc/apache2/sites-available/. See files in [ApacheConfFiles](ApacheConf)
+* For each of the virtual hosts we need a configuration file in /etc/apache2/sites-available/. See files in [ApacheConfFiles](https://github.com/CarpenPi/WebServer/tree/main/ApacheConfFiles)
 * After creating the virtual host configuration files, symbolic links to the files need to be created in /etc/apache2/sites-enabled. This can be done with the commands:
     * ```sudo a2ensite tim.local```
     * ```sudo a2ensite tim.web```
