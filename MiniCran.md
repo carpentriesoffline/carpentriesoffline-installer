@@ -3,7 +3,7 @@
 [miniCRAN website](https://github.com/andrie/miniCRAN)
 
 - Open a Python terminal
-'''python
+```python
 install.packages("miniCRAN")
 library("miniCRAN")
 library(devtools)
