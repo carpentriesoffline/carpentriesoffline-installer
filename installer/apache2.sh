@@ -13,5 +13,6 @@ for i in $(ls ../ApacheConfFiles/tim.*) ; do
 done
 
 apachectl configtest
+systemctl enable apache2
 systemctl restart apache2
 
