@@ -12,6 +12,8 @@ for i in $(ls ../ApacheConfFiles/tim.*) ; do
     a2ensite $shortname
 done
 
+cp ../html/index.html /var/www/
+
 apachectl configtest
 systemctl enable apache2
 systemctl restart apache2
