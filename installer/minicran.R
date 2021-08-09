@@ -1,9 +1,9 @@
+# install minicran
 install.packages("miniCRAN")
+
+# load minicran library
 library("miniCRAN")
-library(devtools)
-install_github("andrie/miniCRAN")
 
 # Download packages
-
 pkgs <- c("tidyverse")
-makeRepo(pkgDep(pkgs), path=file.path(tempdir(), "miniCRAN"))
+makeRepo(pkgDep(pkgs), path="/var/www/tim.cran")
