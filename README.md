@@ -9,8 +9,7 @@ Overview of the project: https://github.com/CarpenPi/docs/wiki
 * Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
 * Write image to SD card using rpi-imager: https://www.raspberrypi.org/software/
 
-- [Serving training materials with ```make serve```](MakeServe.md)
-- [Serving training materials with ```make docker-serve```](DockerServe.md)
-- [Apache](Apache.md)
-- [Nginx](Nginx.md)
-- [MiniCran](MiniCran.md)
+## Run the install script
+* Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
+* curl https://raw.githubusercontent.com/CarpenPi/WebServer/automated_install/setup.sh | bash
+
