@@ -6,4 +6,4 @@ library("miniCRAN")
 
 # Download packages
 pkgs <- c("tidyverse")
-makeRepo(pkgDep(pkgs), path="/var/www/tim.cran")
+makeRepo(pkgDep(pkgs), path="/var/www/html/MiniCRAN/")
