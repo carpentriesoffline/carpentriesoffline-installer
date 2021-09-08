@@ -11,5 +11,5 @@ Overview of the project: https://github.com/CarpenPi/docs/wiki
 
 ## Run the install script
 * Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
-* curl https://raw.githubusercontent.com/CarpenPi/WebServer/automated_install/setup.sh | bash
+* curl https://raw.githubusercontent.com/CarpenPi/WebServer/automated_install/setup.sh > setup.sh && bash ./setup.sh
 
