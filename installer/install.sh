@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #install any pending updates first
-sudo apt update
-sudo apt upgrade
+sudo apt update -y
+sudo apt upgrade -y
 
 sudo ./setup_gitea.sh
 sudo ./apache2.sh
