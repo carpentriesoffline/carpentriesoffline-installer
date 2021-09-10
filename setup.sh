@@ -7,6 +7,8 @@ if [ $(lscpu | grep "^Arch" | awk '{print $2}') = "i686" ] ; then
   if [ "$r" = "y" ] ; then
     sudo apt --purge remove x11-* ant  default-jre-headless java8-runtime-headless ca-certificates-java libreoffice-* vlc* libvlc* desktop-base xserver-xorg lxde lxde-core pixflat-icons pipanel lightdm 
     sudo apt-get autoremove
+    #turn off graphical login
+    sudo systemctl set-default mutli-user.target
   else
     exit
   fi  
