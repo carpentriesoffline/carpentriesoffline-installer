@@ -34,6 +34,9 @@ network={
 * Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
 * curl https://raw.githubusercontent.com/CarpenPi/WebServer/automated_install/setup.sh > setup.sh && bash ./setup.sh
 
+## Change the password
+* Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
+
 ## Connect to CarpenPi
 * Visit http://<your raspberry pi's IP address>, you should get links to the Carpentries Lessons and the Gitea server.
 * The hostname is automatically set to carpenpi. On some networks you'll be able to visit http://carpenpi, but it depends on your router.
