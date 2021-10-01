@@ -8,7 +8,7 @@ Overview of the project: https://github.com/CarpenPi/docs/wiki
 ## You will need:
 * A Raspberry Pi with an internet connection
 * Running Raspbian OS Lite
-* 4GB of more free on the SD card
+* 2.5GB of more free on the SD card
 
 ### Setting up a Raspberry Pi with an operating system:
 * Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
