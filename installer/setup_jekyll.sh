@@ -4,7 +4,7 @@ apt install -y git jekyll build-essential
 #apt-get install -y ruby ruby-dev libxml2-dev ruby-bundler
 
 #needed to build r markdown data carpentry lessons
-apt install -y libcurl4-openssl-dev libxml2-dev r-cran-remotes r-cran-curl 
+apt install -y libcurl4-openssl-dev libxml2-dev r-cran-remotes r-cran-curl r-cran-tidyverse
 
 #are these doing anything? R seems to ignore them
 #r-cran-broom r-cran-cachem r-cran-callr r-cran-cellrange r-cran-dtplyr r-cran-ellipsis r-cran-farver r-cran-fastmap r-cran-forcats r-cran-fs r-cran-gargle \
