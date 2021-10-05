@@ -19,12 +19,15 @@ for repo in $(cat ../lessons.jekyll) ; do
 done
 
 
-for repo in $(cat ../lessons.rmarkdown) ; do
-    repo_name=$(basename $repo)
-    git clone $repo
-    cd $repo_name
-    sudo make
-    cd ..
-done
+#building R markdown is having issues
+#the RSQLite module is needed in the ecology lecture and building it crashes my Pi Zero
+#It seems to ignore system R packages
+#for repo in $(cat ../lessons.rmarkdown) ; do
+#    repo_name=$(basename $repo)
+#    git clone $repo
+#    cd $repo_name
+#    sudo make
+#    cd ..
+#done
 
 cd ..
