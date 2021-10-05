@@ -42,11 +42,12 @@ wget https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/systemd/gitea
 systemctl enable gitea
 systemctl start gitea
 
+#not needed? systemd does this for us
 #setup supervisord
-apt install -y supervisor
-mkdir /home/git/gitea/log/supervisor
-wget https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/supervisor/gitea -O /etc/supervisor/supervisord.conf
-systemctl enable supervisor
-systemctl start supervisor
+#apt install -y supervisor
+#mkdir /home/git/gitea/log/supervisor
+#wget https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/supervisor/gitea -O /etc/supervisor/supervisord.conf
+#systemctl enable supervisor
+#systemctl start supervisor
 
 
