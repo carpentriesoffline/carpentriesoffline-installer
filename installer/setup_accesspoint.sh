@@ -16,3 +16,6 @@ cp access_point_files/ntp.conf /etc/ntp.conf
 
 # allow forwarding/internet access via the Pi
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+
+systemctl unmask hostapd.service
+systemctl enable hostapd.service
