@@ -17,6 +17,7 @@ if [ "$?" = "0" ] ; then
 
     #turn off bluetooth, we aren't using it
     sudo systemctl disable bluetooth.service
+    sudo systemctl disable hciuart.service
 
     #enable a USB gadget serial port for debugging on a Pi Zero
     grep "Zero" /proc/device-tree/model > /dev/null
