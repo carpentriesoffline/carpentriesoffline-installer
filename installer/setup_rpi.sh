@@ -12,7 +12,7 @@ if [ "$?" = "0" ] ; then
     if [ "$?" = "0" ] ; then
         sudo sed -i 's/gpu_mem=[0-9]/gpu_mem=8/' /boot/config.txt
     else
-        echo "gpu_mem=8" | tee /boot/config.txt
+        echo "gpu_mem=8" | tee -a /boot/config.txt
     fi
 
     #turn off bluetooth, we aren't using it
@@ -22,8 +22,8 @@ if [ "$?" = "0" ] ; then
     grep "Zero" /proc/device-tree/model > /dev/null
     if [ "$?" = "0" ] ; then
         echo "Found a Raspberry Pi Zero, enabling USB Serial console"
-        echo "dtoverlay=dwc2" | sudo tee /boot/config.txt
-        echo $(cat /boot/cmdline.txt) modules-load=dwc2,g_serial | sudo tee /boot/cmdline.txt
+        echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
+        echo $(cat /boot/cmdline.txt) modules-load=dwc2,g_serial | sudo tee -a /boot/cmdline.txt
         sudo systemctl enable getty@ttyGS0.service
     else 
         echo "Found a $(cat /proc/device-tree/model), not enabling USB serial console"
