@@ -31,5 +31,3 @@ if [ "$?" = "0" ] ; then
 else
     echo "Not a Raspberry Pi, ignoring Raspberry Pi specific config"
 fi
-
-
