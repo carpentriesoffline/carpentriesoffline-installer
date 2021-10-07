@@ -14,7 +14,7 @@ if [ $(lscpu | grep "^Arch" | awk '{print $2}') = "i686" ] ; then
   fi  
 fi
 
-wget https://github.com/CarpenPi/WebServer/archive/refs/heads/automated_install.zip -O automated_install.zip
+wget https://github.com/CarpenPi/WebServer/archive/refs/heads/main.zip -O automated_install.zip
 unzip automated_install.zip
-cd WebServer-automated_install/installer
+cd WebServer-main/installer
 sudo ./install.sh
