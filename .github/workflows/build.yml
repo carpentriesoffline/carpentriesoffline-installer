@@ -19,6 +19,6 @@ jobs:
       - name: Match checksum
         uses: Flurb/verify-file-checksum-action@v2
         with:
-          file: ${{ env.PI_ZIP }}
+          fileUrl: ${{ env.PI_ZIP }}
           checksum: ${{ env.PI_ZIP_CHECKSUM }}
           algorithm: 'SHA256'
