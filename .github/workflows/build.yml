@@ -14,11 +14,14 @@ jobs:
         uses: actions/checkout@v2
       #- name: Install QEMU
         #run: sudo apt-get install -y qemu-system-arm qemu-efi
-      - name: Download base image
-        run: wget ${{ env.IMG_URL }}
-      - name: Match checksum
-        uses: Flurb/verify-file-checksum-action@v2
+      - name: Cache base image
+        id: cache-image
+        uses: actions/cache@v2
         with:
-          fileUrl: "file://${{ env.PI_ZIP }}"
-          checksum: ${{ env.PI_ZIP_CHECKSUM }}
-          algorithm: 'SHA256'
+          path: ${{ env.PI_ZIP }}
+          key: ${{ env.PI_ZIP }}
+      - name: Download base image
+        if: steps.cache-image.outputs.cache-hit != 'true'
+        run: |
+          wget ${{ env.IMG_URL }}
+          echo "${{ env.PI_ZIP_CHECKSUM }} ${{ env.PI_ZIP }}" | sha256sum -c
