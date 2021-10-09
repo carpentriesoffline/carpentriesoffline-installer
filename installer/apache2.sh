@@ -16,5 +16,6 @@ cp ../html/index.html /var/www/html/
 
 apachectl configtest
 systemctl enable apache2
+#enable server side includes
+a2enmod include
 systemctl restart apache2
-
