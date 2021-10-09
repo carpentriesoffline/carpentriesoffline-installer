@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+        with:
+          path: checkout
       - name: Cache base image
         id: cache-image
         uses: actions/cache@v2
@@ -38,5 +40,22 @@ jobs:
           imagePath: ${{ env.PI_IMG }}
           bootDeviceMapper: ${{ steps.mount-image.outputs.bootDeviceMapper }}
           rootDeviceMapper: ${{ steps.mount-image.outputs.rootDeviceMapper }}
-      #- name: Install QEMU
-        #run: sudo apt-get install -y qemu-system-arm qemu-efi
+      - name: Install QEMU
+        run: sudo apt-get install -y qemu-system-arm qemu-efi
+      - name: Run QEMU as a service
+        run: |
+          loginctl enable-linger runner
+          sleep 1
+          ls /run/user/$UID 
+          mkdir -p $HOME/.config/systemd/user
+          cp checkout/qemu.service $HOME/.config/systemd/user
+          XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
+          sleep 120
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: localhost
+          username: pi
+          password: raspberry
+          port: 5022
+          script: whoami
