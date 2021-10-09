@@ -1,0 +1,14 @@
+name: Build Carpenpi raspberry pi image
+on: [push,release]
+jobs:
+  env:
+    # Change these when updating to new version of raspberry pi OS
+    IMG_URL: https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-01-12/2021-01-11-raspios-buster-armhf-lite.zip
+    PI_ZIP: 2021-01-11-raspios-buster-armhf-lite.zip
+    PI_ZIP_CHECKSUM: d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
+    PI_IMG: 2021-01-11-raspios-buster-armhf-lite.img
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
