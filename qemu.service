@@ -4,7 +4,7 @@ Wants=network.target
 After=network-online.target
 
 [Service]
-ExecStart=/bin/bash echo "hello"
+ExecStart=/bin/bash /tmp/start_qemu.sh
 KillMode=none
 Type=forking
 

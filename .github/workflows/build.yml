@@ -18,14 +18,17 @@ jobs:
         id: cache-image
         uses: actions/cache@v2
         with:
-          path: ${{ env.PI_IMG }}
-          key: ${{ env.PI_IMG }}
+          path: ${{ env.PI_IMG }}.orig
+          key: ${{ env.PI_IMG }}.orig
       - name: Download base image
         if: steps.cache-image.outputs.cache-hit != 'true'
         run: |
           wget --quiet ${{ env.IMG_URL }}
           echo "${{ env.PI_ZIP_CHECKSUM }} ${{ env.PI_ZIP }}" | sha256sum -c
           unzip ${{ env.PI_ZIP }}
+          mv ${{ env.PI_IMG }} ${{ env.PI_IMG }}.orig
+      - name: Create clean base image
+        cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
       - name: Mount image
         id: mount-image
         uses: damianperera/mount-image-action@v1
