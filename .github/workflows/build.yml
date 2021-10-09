@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      #- name: Install QEMU
-        #run: sudo apt-get install -y qemu-system-arm qemu-efi
       - name: Cache base image
         id: cache-image
         uses: actions/cache@v2
@@ -26,3 +24,15 @@ jobs:
           wget --quiet ${{ env.IMG_URL }}
           echo "${{ env.PI_ZIP_CHECKSUM }} ${{ env.PI_ZIP }}" | sha256sum -c
           unzip ${{ env.PI_ZIP }}
+      - name: Mount image
+        id: mount-image
+        uses: damianperera/mount-image-action@v1
+        with:
+          imagePath: ${{ env.PI_IMG }}
+          mountPoint: /mnt/pi
+      - name: Enable ssh in boot sector
+        run: sudo touch /mnt/pi/boot/ssh
+      - name: Unmount image
+        run: sudo umount /mnt/pi
+      #- name: Install QEMU
+        #run: sudo apt-get install -y qemu-system-arm qemu-efi
