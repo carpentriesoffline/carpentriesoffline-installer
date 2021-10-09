@@ -28,7 +28,7 @@ jobs:
           unzip ${{ env.PI_ZIP }}
           mv ${{ env.PI_IMG }} ${{ env.PI_IMG }}.orig
       - name: Create clean base image
-        cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
+        run: cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
       - name: Mount image
         id: mount-image
         uses: damianperera/mount-image-action@v1
