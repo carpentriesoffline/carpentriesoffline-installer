@@ -12,3 +12,5 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Install QEMU
+        runs: apt-get install -y qemu-system-arm qemu-efi
