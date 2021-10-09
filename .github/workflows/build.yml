@@ -1,4 +1,4 @@
-name: Build Carpenpi raspberry pi image
+name: Build Carpenpi image
 on: [push,release]
 jobs:
   build:
