@@ -33,6 +33,10 @@ jobs:
       - name: Enable ssh in boot sector
         run: sudo touch /mnt/pi/boot/ssh
       - name: Unmount image
-        run: sudo umount /mnt/pi
+        uses: damianperera/unmount-image-action@v1
+        with:
+          imagePath: ${{ env.PI_IMG }}
+          bootDeviceMapper: ${{ steps.mount-image.outputs.bootDeviceMapper }}
+          rootDeviceMapper: ${{ steps.mount-image.outputs.rootDeviceMapper }}
       #- name: Install QEMU
         #run: sudo apt-get install -y qemu-system-arm qemu-efi
