@@ -42,6 +42,11 @@ jobs:
           rootDeviceMapper: ${{ steps.mount-image.outputs.rootDeviceMapper }}
       - name: Install QEMU
         run: sudo apt-get install -y qemu-system-arm qemu-efi
+      - name: Checkout qemu pi kernels
+        uses: actions/checkout@v2
+        with:
+          repository: dhruvvyas90/qemu-rpi-kernel
+          path: qemu-rpi-kernel
       - name: Run QEMU as a service
         run: |
           loginctl enable-linger runner
@@ -51,7 +56,7 @@ jobs:
           cp checkout/qemu.service $HOME/.config/systemd/user
           XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
           sleep 120
-      - name: executing remote ssh commands using password
+      - name: Login to pi and run install
         uses: appleboy/ssh-action@master
         with:
           host: localhost
