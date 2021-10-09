@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo $USER
+echo $HOME
+cd $HOME
+
 qemu-system-arm \
  -M versatilepb \
  -cpu arm1176 \

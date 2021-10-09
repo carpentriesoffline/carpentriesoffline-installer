@@ -53,10 +53,11 @@ jobs:
           sleep 1
           ls /run/user/$UID 
           mkdir -p $HOME/.config/systemd/user
-          cp checkout/qemu.service $HOME/.config/systemd/user
+          cp checkout/qemu.service /tmp
+          cp checkout/start_qemu.sh $HOME/.config/systemd/user
           XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
           sleep 120
-      - name: Login to pi and run install
+      - name: Login to pi and run carpenpi install
         uses: appleboy/ssh-action@master
         with:
           host: localhost
