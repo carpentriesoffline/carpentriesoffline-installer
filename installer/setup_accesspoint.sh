@@ -19,3 +19,7 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 
 systemctl unmask hostapd.service
 systemctl enable hostapd.service
+#we don't need wpa_supplicant after hostapd is active
+systemctl disable wpa_supplicant
+#we don't need dhcpcd either as the interfaces file invokes dhclient instead
+systemctl disable dhcpcd
