@@ -15,12 +15,10 @@ jobs:
       #- name: Install QEMU
         #run: sudo apt-get install -y qemu-system-arm qemu-efi
       - name: Download base image
-        run: |
-          wget ${{ env.IMG_URL }}
+        run: wget ${{ env.IMG_URL }}
       - name: Match checksum
         uses: Flurb/verify-file-checksum-action@v2
         with:
           file: ${{ env.PI_ZIP }}
           checksum: ${{ env.PI_ZIP_CHECKSUM }}
           algorithm: 'SHA256'
-          sha256sum 
