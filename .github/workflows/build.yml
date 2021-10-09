@@ -7,8 +7,7 @@ jobs:
       # Change these when updating to new version of raspberry pi OS
       IMG_URL: https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-01-12/2021-01-11-raspios-buster-armhf-lite.zip
       PI_ZIP: 2021-01-11-raspios-buster-armhf-lite.zip
-      PI_ZIP_CHECKSUM: d48d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
-      #PI_ZIP_CHECKSUM: d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
+      PI_ZIP_CHECKSUM: d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
       PI_IMG: 2021-01-11-raspios-buster-armhf-lite.img
     steps:
       - name: Check out repository code
@@ -22,8 +21,8 @@ jobs:
           path: ${{ env.PI_IMG }}
           key: ${{ env.PI_IMG }}
       - name: Download base image
-        #if: steps.cache-image.outputs.cache-hit != 'true'
+        if: steps.cache-image.outputs.cache-hit != 'true'
         run: |
-          wget ${{ env.IMG_URL }}
+          wget --quiet ${{ env.IMG_URL }}
           echo "${{ env.PI_ZIP_CHECKSUM }} ${{ env.PI_ZIP }}" | sha256sum -c
           unzip ${{ env.PI_ZIP }}
