@@ -26,6 +26,9 @@ send "raspberry\n"
 set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
+send "sudo systemctl enable ssh\n"
+
+expect $PROMPT
 send "sudo poweroff\n"
 
 interact

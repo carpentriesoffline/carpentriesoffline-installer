@@ -29,20 +29,6 @@ jobs:
           mv ${{ env.PI_IMG }} ${{ env.PI_IMG }}.orig
       - name: Create clean base image
         run: cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
-      - name: Mount image
-        id: mount-image
-        uses: damianperera/mount-image-action@v1
-        with:
-          imagePath: ${{ env.PI_IMG }}
-          mountPoint: /mnt/pi
-      - name: Enable ssh in boot sector
-        run: sudo touch /mnt/pi/boot/ssh
-      - name: Unmount image
-        uses: damianperera/unmount-image-action@v1
-        with:
-          imagePath: ${{ env.PI_IMG }}
-          bootDeviceMapper: ${{ steps.mount-image.outputs.bootDeviceMapper }}
-          rootDeviceMapper: ${{ steps.mount-image.outputs.rootDeviceMapper }}
       - name: Install packages
         run: sudo apt-get install -y qemu-system-arm qemu-efi expect
       - name: Checkout qemu pi kernels
