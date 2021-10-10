@@ -8,13 +8,14 @@ echo $PWD
 cd $PWD
 
 pwd
-
 ls
 
 export QEMU_AUDIO_DRV=none # disable audio
 
+mkfifo /tmp/pi_io.in /tmp/pi_io.out # Setup serial IO for seeing pi output
+
 qemu-system-arm \
-  -D /tmp/qemu.log \
+  -serial pipe:/tmp/pi_io \
   -M versatilepb \
   -cpu arm1176 \
   -m 256 \
@@ -24,8 +25,7 @@ qemu-system-arm \
   -net nic \
   -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
   -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
-  -append 'root=/dev/vda2 panic=1' \
+  -append 'root=/dev/vda2 panic=1 console=ttyS0' \
   -no-reboot \
-  -nographic 
-  #-display none \
-  #-daemonize
+  -display none \
+  -daemonize
