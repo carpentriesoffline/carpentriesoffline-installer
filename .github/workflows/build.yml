@@ -1,5 +1,8 @@
 name: Build Carpenpi image
-on: [push,release]
+on:
+  release:
+    types: [published]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,6 +12,8 @@ jobs:
       PI_ZIP: 2021-01-11-raspios-buster-armhf-lite.zip
       PI_ZIP_CHECKSUM: d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
       PI_IMG: 2021-01-11-raspios-buster-armhf-lite.img
+      OUTPUT_IMG: 2021-01-11-raspios-buster-armhf-lite-carpenpi.img
+      OUTPUT_ZIP: 2021-01-11-raspios-buster-armhf-lite-carpenpi.zip
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -31,6 +36,8 @@ jobs:
         run: cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
       - name: Install packages
         run: sudo apt-get install -y qemu-system-arm qemu-efi expect
+      - name: Resize image
+        run: qemu-img resize -f raw ${{ env.PI_IMG }} +4G
       - name: Checkout qemu pi kernels
         uses: actions/checkout@v2
         with:
@@ -39,3 +46,19 @@ jobs:
       - name: Run QEMU & install CarpenPi
         run: |
           ./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
+      - name: Shrink final image
+        run: |
+          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+          chmod a+x pishrink.sh
+          ./pishrink.sh ${{env.PI_IMG}} ${{env.OUTPUT_IMG}}
+          zip ${{env.OUTPUT_ZIP}} ${{env.OUTPUT_IMG}}
+      - name: Upload image as release
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{env.OUTPUT_ZIP}}
+          asset_name: ${{env.OUTPUT_ZIP}}
+          asset_content_type: application/zip
