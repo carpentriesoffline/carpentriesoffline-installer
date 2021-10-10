@@ -25,5 +25,5 @@ send "raspberry\n"
 
 set PROMPT "pi@raspberrypi:~$ "
 
-expect $PROMPT
+expect "$PROMPT"
 send "sudo poweroff"
