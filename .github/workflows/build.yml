@@ -55,26 +55,25 @@ jobs:
           touch /tmp/qemu.conf
           echo "PWD="$(pwd) >> /tmp/qemu.conf
           echo "PI_IMG="${{ env.PI_IMG }} >> /tmp/qemu.conf
-          ./checkout/test/start_qemu.sh
-          exit -1
-      #- name: Run QEMU as a service
-        #run: |
-          #loginctl enable-linger runner
-          #sleep 1
-          #ls /run/user/$UID 
-          #mkdir -p $HOME/.config/systemd/user
-          #cp checkout/test/start_qemu.sh /tmp
-          #cp checkout/test/qemu.service $HOME/.config/systemd/user
-          #XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
-          #until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
+      - name: Run QEMU as a service
+        run: |
+          loginctl enable-linger runner
+          sleep 1
+          ls /run/user/$UID 
+          mkdir -p $HOME/.config/systemd/user
+          cp checkout/test/start_qemu.sh /tmp
+          cp checkout/test/qemu.service $HOME/.config/systemd/user
+          XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
+          until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
         #continue-on-error: true
-      #- name: Debug systemd
-        #run: |
-          #loginctl enable-linger runner
-          #sleep 1
-          #ls /run/user/$UID 
-          #XDG_RUNTIME_DIR=/run/user/$UID systemctl --user status qemu.service
-          #exit -1
+        timeout-minutes: 10
+      - name: Debug systemd
+        run: |
+          loginctl enable-linger runner
+          sleep 1
+          ls /run/user/$UID 
+          XDG_RUNTIME_DIR=/run/user/$UID systemctl --user status qemu.service
+          exit -1
       - name: Login to pi and run carpenpi install
         uses: appleboy/ssh-action@master
         with:
