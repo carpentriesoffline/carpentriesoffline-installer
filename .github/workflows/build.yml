@@ -45,7 +45,8 @@ jobs:
           path: qemu-rpi-kernel
       - name: Run QEMU & install CarpenPi
         run: |
-          ./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
+          # Don't do it! It's not ready!
+          #./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
       - name: Shrink final image
         run: |
           wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
