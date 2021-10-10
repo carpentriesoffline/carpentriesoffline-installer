@@ -26,6 +26,6 @@ qemu-system-arm \
   -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
   -append 'root=/dev/vda2 panic=1' \
   -no-reboot \
+  -nographic 
   #-display none \
   #-daemonize
-  -nographic 
