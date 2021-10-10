@@ -2,9 +2,6 @@
 
 PI_IMG=$1
 echo $PI_IMG
-echo $USER
-echo $HOME
-cd $HOME
 
 ls -l
 

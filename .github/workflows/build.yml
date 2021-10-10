@@ -52,7 +52,7 @@ jobs:
           path: qemu-rpi-kernel
       - name: Just run QEMU
         run: |
-          ./checkout/start_qemu.sh
+          ./checkout/start_qemu.sh ${{ env.PI_IMG }}
       #- name: Run QEMU as a service
         #run: |
           #loginctl enable-linger runner
