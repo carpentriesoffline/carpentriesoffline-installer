@@ -52,7 +52,7 @@ jobs:
           path: qemu-rpi-kernel
       - name: Run QEMU & install CarpenPi
         run: |
-          ./checkout/test/install_carpenpi.exp ${{PI_IMG}}
+          ./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
       #- name: Log QEMU
         #run: |
           #ps aux | grep qemu
