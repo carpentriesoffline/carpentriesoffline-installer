@@ -5,7 +5,7 @@ echo $PI_IMG
 
 ls -l
 
-export QEMU_AUDIO_DRV=none
+export QEMU_AUDIO_DRV=none # disable audio
 
 qemu-system-arm \
  -M versatilepb \

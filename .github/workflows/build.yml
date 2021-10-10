@@ -52,8 +52,10 @@ jobs:
           path: qemu-rpi-kernel
       - name: Run QEMU as daemon
         run: |
-          ./checkout/test/start_qemu.sh ${{ env.PI_IMG }}
-          until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
+          pwd
+          exit -1
+          #./checkout/test/start_qemu.sh ${{ env.PI_IMG }}
+          #until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
         timeout-minutes: 10
       #- name: Run QEMU as a service
         #run: |
@@ -61,10 +63,10 @@ jobs:
           #sleep 1
           #ls /run/user/$UID 
           #mkdir -p $HOME/.config/systemd/user
-          #cp checkout/start_qemu.sh /tmp
-          #cp checkout/qemu.service $HOME/.config/systemd/user
+          #cp checkout/test/start_qemu.sh /tmp
+          #cp checkout/test/qemu.service $HOME/.config/systemd/user
           #XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
-          #sleep 120
+          #until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
         #continue-on-error: true
       #- name: Debug systemd
         #run: |
