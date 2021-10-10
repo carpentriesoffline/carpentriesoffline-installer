@@ -9,7 +9,7 @@ spawn qemu-system-arm \
   -M versatilepb \
   -cpu arm1176 \
   -m 256 \
-  -drive "file="${argv[1]}",if=none,index=0,media=disk,format=raw,id=disk0" \
+  -drive "file=${argv[1]},if=none,index=0,media=disk,format=raw,id=disk0" \
   -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
   -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
   -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
