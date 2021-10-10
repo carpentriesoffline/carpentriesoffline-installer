@@ -64,7 +64,8 @@ jobs:
           cp checkout/test/start_qemu.sh /tmp
           cp checkout/test/qemu.service $HOME/.config/systemd/user
           XDG_RUNTIME_DIR=/run/user/$UID systemctl --user enable --now qemu.service
-          until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
+          while true; do nc localhost 5022; ssh pi@localhost -p 5022; sleep 10; done
+          #until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
         #continue-on-error: true
         timeout-minutes: 10
       - name: Debug systemd
