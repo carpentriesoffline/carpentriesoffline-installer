@@ -36,13 +36,16 @@ jobs:
         run: cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
       - name: Install packages
         run: sudo apt-get install -y qemu-system-arm qemu-efi expect
-      - name: Resize image
-        run: qemu-img resize -f raw ${{ env.PI_IMG }} +4G
       - name: Checkout qemu pi kernels
         uses: actions/checkout@v2
         with:
           repository: dhruvvyas90/qemu-rpi-kernel
           path: qemu-rpi-kernel
+      - name: Resize image
+        run: |
+          cp ${{env.PI_IMG}} base.img
+          qemu-img resize -f raw ${{ env.PI_IMG }} +4G
+          ./checkout/test/resize_pi.exp ${{env.PI_IMG}}
       - name: Run QEMU & install CarpenPi
         run: |
           # Don't do it! It's not ready!
