@@ -23,7 +23,5 @@ send "pi\n"
 expect "Password: "
 send "raspberry\n"
 
-set PROMPT "pi@raspberrypi:~$ "
-
-expect "$PROMPT"
+expect "pi@raspberrypi:~$ "
 send "sudo poweroff"
