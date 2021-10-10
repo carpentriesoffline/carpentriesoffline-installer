@@ -51,7 +51,7 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
           chmod a+x pishrink.sh
-          ./pishrink.sh ${{env.PI_IMG}} ${{env.OUTPUT_IMG}}
+          sudo ./pishrink.sh ${{env.PI_IMG}} ${{env.OUTPUT_IMG}}
           zip ${{env.OUTPUT_ZIP}} ${{env.OUTPUT_IMG}}
       - name: Upload image as release
         id: upload-release-asset 
