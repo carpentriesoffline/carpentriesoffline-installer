@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
-source /tmp/qemu.conf
+PI_IMG=$1
 
-echo $PI_IMG
-echo $PWD
-
-cd $PWD
-
-pwd
-ls
+echo PI_IMG=$PI_IMG
+echo PWD=$(pwd)
 
 export QEMU_AUDIO_DRV=none # disable audio
 
