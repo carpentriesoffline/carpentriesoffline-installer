@@ -32,8 +32,10 @@ network={
  psk="my_networks_password"
 }
 ```
-## Login to the Raspberry Pi
-* Login to your Raspberry Pi with an SSH client or on a local screen/keyboard
+
+## Run the install script
+* Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
+* curl https://raw.githubusercontent.com/CarpenPi/WebServer/main/setup.sh > setup.sh && bash ./setup.sh
 
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
