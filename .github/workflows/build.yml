@@ -53,6 +53,7 @@ jobs:
       - name: Just run QEMU
         run: |
           ./checkout/start_qemu.sh ${{ env.PI_IMG }}
+          sleep 120
       #- name: Run QEMU as a service
         #run: |
           #loginctl enable-linger runner
