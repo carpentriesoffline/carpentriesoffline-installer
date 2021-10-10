@@ -71,11 +71,11 @@ jobs:
           #ls /run/user/$UID 
           #XDG_RUNTIME_DIR=/run/user/$UID systemctl --user status qemu.service
           #exit -1
-      #- name: Login to pi and run carpenpi install
-        #uses: appleboy/ssh-action@master
-        #with:
-          #host: localhost
-          #username: pi
-          #password: raspberry
-          #port: 5022
-          #script: whoami
+      - name: Login to pi and run carpenpi install
+        uses: appleboy/ssh-action@master
+        with:
+          host: localhost
+          username: pi
+          password: raspberry
+          port: 5022
+          script: whoami
