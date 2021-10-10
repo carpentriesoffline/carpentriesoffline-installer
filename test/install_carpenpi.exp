@@ -24,4 +24,5 @@ expect "Password: "
 send "raspberry\n"
 
 expect "pi@raspberrypi:~$ "
-send "sudo poweroff"
+send "echo hello\n"
+#send "sudo poweroff\n"
