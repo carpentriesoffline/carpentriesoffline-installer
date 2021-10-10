@@ -58,6 +58,8 @@ jobs:
       - name: Run QEMU
         run: |
           ./checkout/test/start_qemu.sh
+      - name: Log QEMU
+        run: |
           ps aux | grep qemu
           cat /tmp/pi_io.out
       #- name: Run QEMU as a service
