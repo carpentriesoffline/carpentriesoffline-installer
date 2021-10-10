@@ -61,7 +61,8 @@ jobs:
       - name: Log QEMU
         run: |
           ps aux | grep qemu
-          cat /tmp/pi_io.out
+          cat /tmp/pi_io.out &
+          until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
       #- name: Run QEMU as a service
         #run: |
           #loginctl enable-linger runner
