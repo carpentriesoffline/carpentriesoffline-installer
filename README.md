@@ -3,22 +3,25 @@
 # General CarpenPi Documentation
 Overview of the project: https://github.com/CarpenPi/docs/wiki
 
+This repository contains scripts to intialise a Raspberry Pi with the CarpenPi software. 
+
 # Initial Setup of the Raspberry Pi
 
 ## You will need:
 * A Raspberry Pi with an internet connection
-* Running Raspbian OS Lite
+* An installation of Raspberry Pi OS Lite
 * 2.5GB of more free on the SD card
 
-### Setting up a Raspberry Pi with an operating system:
+## Setting up a Raspberry Pi with an operating system:
 * Download Raspbian OS Lite: https://www.raspberrypi.org/software/operating-systems/
 * Write image to SD card using rpi-imager: https://www.raspberrypi.org/software/
 
-#### Setup for headless config (useful if you don't have a screen and keyboard to hand)
+### Setup for headless config (useful if you don't have a screen and keyboard to hand)
 * In the boot (small FAT32) partition on the SD card create an empty file called "ssh"
-* If you're using WiFi to get online, create a file called wpa_supplicant.conf in the boot partition. Paste in the following and set your network SSID and password appropriately.
+* If you're using WiFi to get access to the Pi, create a file called wpa_supplicant.conf in the boot partition. Paste in the following and set your network SSID and password appropriately.
 
 ```
+#set this to your country code, gb=great britain
 country=gb
 update_config=1
 ctrl_interface=/var/run/wpa_supplicant
@@ -37,7 +40,15 @@ network={
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
 
+## Run the install script
+* Run the command:
+
+`curl https://github.com/CarpenPi/WebServer/raw/main/setup.sh > setup.sh && bash ./setup.sh`
+
 ## Connect to CarpenPi
-* Visit http://<your raspberry pi's IP address>, you should get links to the Carpentries Lessons and the Gitea server.
-* The hostname is automatically set to carpenpi. On some networks you'll be able to visit http://carpenpi or http://carpenpi.org, but it depends on your router.
-* We still need to get access point mode working together with the web server, currently you need a second Pi to act as the access point or need to rely on another WiFi router.
+* After installing the Raspberry Pi will reboot.
+* It will then switch the WiFi interface to access point mode and will be available as a network called carpenpi. 
+* Connect to the carpenpi WiFi network
+* Visting http://carpenpi.org or http://192.168.1.1
+* You should get links to the Carpentries Lessons and the Gitea server on the Raspberry Pi
+
