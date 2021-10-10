@@ -55,8 +55,11 @@ jobs:
           touch /tmp/qemu.conf
           echo "PWD="$(pwd) >> /tmp/qemu.conf
           echo "PI_IMG="${{ env.PI_IMG }} >> /tmp/qemu.conf
+      - name: Run QEMU
+        run: |
           ./checkout/test/start_qemu.sh
-          tail -f /tmp/pi_io.out
+          ps aux | grep qemu
+          cat /tmp/pi_io.out
       #- name: Run QEMU as a service
         #run: |
           #loginctl enable-linger runner

@@ -25,7 +25,7 @@ qemu-system-arm \
   -net nic \
   -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
   -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
-  -append 'root=/dev/vda2 panic=1 console=ttyS0' \
+  -append 'root=/dev/vda2 panic=1' \
   -no-reboot \
   -display none \
   -daemonize
