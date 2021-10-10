@@ -50,13 +50,13 @@ jobs:
         with:
           repository: dhruvvyas90/qemu-rpi-kernel
           path: qemu-rpi-kernel
-      - name: Run QEMU as daemon
+      - name: Create QEMU config
         run: |
-          pwd
+          touch /tmp/qemu.conf
+          echo "PWD="$(pwd) >> /tmp/qemu.conf
+          echo "PI_IMG="${{ env.PI_IMG }} >> /tmp/qemu.conf
+          ./checkout/test/start_qemu.sh
           exit -1
-          #./checkout/test/start_qemu.sh ${{ env.PI_IMG }}
-          #until bash ./checkout/test/ssh_alive_check.sh localhost 5022; do sleep 10; done
-        timeout-minutes: 10
       #- name: Run QEMU as a service
         #run: |
           #loginctl enable-linger runner
