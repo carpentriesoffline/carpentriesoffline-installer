@@ -5,6 +5,8 @@ echo $PI_IMG
 
 ls -l
 
+export QEMU_AUDIO_DRV=none
+
 qemu-system-arm \
  -M versatilepb \
  -cpu arm1176 \
