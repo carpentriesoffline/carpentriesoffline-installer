@@ -43,7 +43,7 @@ network={
 ## Run the install script
 * Run the command:
 
-`curl https://github.com/CarpenPi/WebServer/raw/main/setup.sh > setup.sh && bash ./setup.sh`
+`curl https://raw.githubusercontent.com/CarpenPi/WebServer/main/setup.sh > setup.sh && bash ./setup.sh`
 
 ## Connect to CarpenPi
 * After installing the Raspberry Pi will reboot.
