@@ -4,6 +4,9 @@
 sudo apt update -y
 sudo apt upgrade -y
 
+#install key utilities just in case we don't have them
+sudo apt install -y wget unzip git build-essential
+
 #set the hostname to carpenpi
 sudo hostname carpenpi
 echo carpenpi | sudo tee /etc/hostname
