@@ -12,7 +12,7 @@ cp ../ApacheConfFiles/apache2.conf /etc/apache2/
 #    a2ensite $shortname
 #done
 
-cp ../html/index.html /var/www/html/
+cp -r ../html/. /var/www/html/
 
 apachectl configtest
 systemctl enable apache2
