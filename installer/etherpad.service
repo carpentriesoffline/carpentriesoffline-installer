@@ -20,7 +20,7 @@ WorkingDirectory=/home/etherpad/
 #RuntimeDirectory=gitea
 ExecStart=/home/etherpad/etherpad-lite/bin/run.sh
 Restart=always
-Environment=USER=etherpad HOME=/var/lib/etherpad
+Environment=USER=etherpad HOME=/home/etherpad
 
 [Install]
 WantedBy=multi-user.target
