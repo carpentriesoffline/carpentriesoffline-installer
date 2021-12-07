@@ -21,5 +21,6 @@ sudo ./setup_content.sh
 sudo ./setup_cran.sh
 sudo ./setup_gitea.sh
 sudo ./setup_accesspoint.sh
-
+sudo ./setup_etherpad.sh
+sudo ./setup_jupyter.sh
 sudo reboot
