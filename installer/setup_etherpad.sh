@@ -17,8 +17,9 @@ sudo adduser \
 
 cd /home/etherpad
 sudo -s -u etherpad git clone --branch master https://github.com/ether/etherpad-lite.git
+sudo -s -u etherpad cp /home/etherpad/etherpad-lite/settings.json.template /home/etherpad/etherpad-lite/settings.json
 sudo -s -u etherpad sed -i 's/"suppressErrorsInPadText": false/"suppressErrorsInPadText": true/' /home/etherpad/etherpad-lite/settings.json
-
+sudo -s -u etherpad /home/etherpad/etherpad-lite/bin/installDeps.sh
 cd -
 sudo cp etherpad.service /etc/systemd/system/
 sudo systemctl enable etherpad
