@@ -24,6 +24,7 @@ sudo mkdir ~jupyter/.jupyter
 
 echo "c.ServerApp.password = u'$jupyter_pass'" | sudo tee -a ~jupyter/.jupyter/jupyter_notebook_config.py
 
+sudo chown -R jupyter:jupyter /home/jupyter
 sudo cp jupyter.service /etc/systemd/system/
 sudo systemctl enable jupyter
 sudo systemctl start jupyter
