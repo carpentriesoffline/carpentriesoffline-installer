@@ -18,7 +18,7 @@ sudo -s -u jupyter pip3 install jupyterlab
 #pip3 install pandas matplotlib
 
 sudo -s -u jupyter pip3 install --upgrade jupyter-core
-jupyter_pass=`python3 jupyter_password.py`
+jupyter_pass=`sudo -s -u jupyter python3 jupyter_password.py`
 
 sudo mkdir ~jupyter/.jupyter
 
@@ -27,5 +27,3 @@ echo "c.ServerApp.password = u'$jupyter_pass'" | sudo tee -a ~jupyter/.jupyter/j
 sudo cp jupyter.service /etc/systemd/system/
 sudo systemctl enable jupyter
 sudo systemctl start jupyter
-
-
