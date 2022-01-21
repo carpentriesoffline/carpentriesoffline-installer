@@ -19,16 +19,18 @@ if [ "$?" = "0" ] ; then
     sudo systemctl disable bluetooth.service
     sudo systemctl disable hciuart.service
 
+    #not enabling this by default, it causes shutdown to hang when not connected
+    #it is also rather unreliable when connected and this limits its usefulness
     #enable a USB gadget serial port for debugging on a Pi Zero
-    grep "Zero" /proc/device-tree/model > /dev/null
-    if [ "$?" = "0" ] ; then
-        echo "Found a Raspberry Pi Zero, enabling USB Serial console"
-        echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
-        echo $(cat /boot/cmdline.txt) modules-load=dwc2,g_serial | sudo tee /boot/cmdline.txt
-        sudo systemctl enable getty@ttyGS0.service
-    else 
-        echo "Found a $(cat /proc/device-tree/model), not enabling USB serial console"
-    fi
+    #grep "Zero" /proc/device-tree/model > /dev/null
+    #if [ "$?" = "0" ] ; then
+    #    echo "Found a Raspberry Pi Zero, enabling USB Serial console"
+    #    echo "dtoverlay=dwc2" | sudo tee -a /boot/config.txt
+    #    echo $(cat /boot/cmdline.txt) modules-load=dwc2,g_serial | sudo tee /boot/cmdline.txt
+    #    sudo systemctl enable getty@ttyGS0.service
+    #else 
+    #    echo "Found a $(cat /proc/device-tree/model), not enabling USB serial console"
+    #fi
 else
     echo "Not a Raspberry Pi, ignoring Raspberry Pi specific config"
 fi
