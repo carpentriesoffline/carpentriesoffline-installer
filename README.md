@@ -40,10 +40,6 @@ network={
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
 
-## Run the install script
-* Run the command:
-
-`curl https://raw.githubusercontent.com/CarpenPi/WebServer/main/setup.sh > setup.sh && bash ./setup.sh`
 
 ## Connect to CarpenPi
 * After installing the Raspberry Pi will reboot.
