@@ -1,9 +1,9 @@
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8B%20%20%E2%97%8B-orange)](https://fair-software.eu)
 
-# General CarpenPi Documentation
-Overview of the project: https://github.com/CarpenPi/docs/wiki
+# General Carpentries Offline Documentation
+Overview of the project: https://github.com/carpentriesoffline/CarpentriesOffline.github.io/tree/main/docs
 
-This repository contains scripts to intialise a Raspberry Pi with the CarpenPi software. 
+This repository contains scripts to intialise a Raspberry Pi with the Carpentries Offline software. 
 
 # Initial Setup of the Raspberry Pi
 
@@ -35,16 +35,16 @@ network={
 
 ## Run the install script
 * Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
-* curl https://raw.githubusercontent.com/CarpenPi/WebServer/main/setup.sh > setup.sh && bash ./setup.sh
+* curl https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/main/setup.sh > setup.sh && bash ./setup.sh
 
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
 
 
-## Connect to CarpenPi
+## Connect to Carpentries Offline
 * After installing the Raspberry Pi will reboot.
-* It will then switch the WiFi interface to access point mode and will be available as a network called carpenpi. 
+* It will then switch the WiFi interface to access point mode and will be available as a network called carpentries-offline. 
 * Connect to the carpenpi WiFi network
-* Visting http://carpenpi.org or http://192.168.1.1
+* Visting http://carpentries-offline.org or http://192.168.1.1
 * You should get links to the Carpentries Lessons and the Gitea server on the Raspberry Pi
 
