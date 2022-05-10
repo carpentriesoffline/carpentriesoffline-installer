@@ -35,7 +35,7 @@ network={
 
 ## Run the install script
 * Login to your Raspberry Pi with an SSH client or on a local screen/keyboard and run the command:
-* curl https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/main/setup.sh > setup.sh && bash ./setup.sh
+* curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh && bash ./setup.sh
 
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
