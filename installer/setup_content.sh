@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt install -y python3-pip r-base-core
+apt install -y python3-pip r-base-core python3-lxml
 
 pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
 
