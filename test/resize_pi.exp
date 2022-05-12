@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+
+# Wait enough (forever) until a long-time boot
+set timeout -1
+
+# Start VM
+spawn qemu-system-arm \
+  -serial stdio \
+  -M versatilepb \
+  -cpu arm1176 \
+  -m 256 \
+  -drive "file=base.img,if=none,index=0,media=disk,format=raw,id=disk0" \
+  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
+  -hdb "[lindex $argv 0].img" \
+  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
+  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
+  -append "root=/dev/vda2 panic=1" \
+  -no-reboot \
+  -display none
+
+expect "raspberrypi login: "
+send "pi\n"
+
+expect "Password: "
+send "raspberry\n"
+
+set PROMPT "pi@raspberrypi:~$ "
+
+expect $PROMPT
+send "sudo cfdisk /dev/sdb\n"
+
+expect $PROMPT
+send "sudo resize2fs /dev/sdb2\n"
+
+expect $PROMPT
+send "sudo fsck -f /dev/sdb2\n"
+
+expect $PROMPT
+send "sudo poweroff\n"
+
+interact
