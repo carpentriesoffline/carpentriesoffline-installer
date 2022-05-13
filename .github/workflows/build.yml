@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - github_actions
+  workflow_dispatch:
   release:
     types: [publish]
 
@@ -48,6 +49,8 @@ jobs:
         run: |
           cp ${{env.PI_IMG}} base.img
           qemu-img resize -f raw ${{ env.PI_IMG }} +4G
+          ls checkout
+          ls checkout/test
           ./checkout/test/resize_pi.exp ${{env.PI_IMG}}
       - name: Run QEMU & install CarpenPi
         run: |
