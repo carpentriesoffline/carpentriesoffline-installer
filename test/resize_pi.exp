@@ -11,7 +11,7 @@ spawn qemu-system-arm \
   -m 256 \
   -drive "file=base.img,if=none,index=0,media=disk,format=raw,id=disk0" \
   -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
-  -hdb "[lindex $argv 0].img" \
+  -hdb "[lindex $argv 0]" \
   -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
   -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
   -append "root=/dev/vda2 panic=1" \
