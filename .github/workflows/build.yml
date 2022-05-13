@@ -1,10 +1,10 @@
 name: Build Carpenpi image
-on:
-  release:
-    types: [published]
+on: 
+  push:
     branches: 
-       - main
-       - github_actions
+      - github_actions
+  release:
+    types: [publish]
 
 jobs:
   build:
