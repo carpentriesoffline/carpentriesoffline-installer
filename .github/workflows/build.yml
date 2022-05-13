@@ -49,11 +49,11 @@ jobs:
         run: |
           cp ${{env.PI_IMG}} base.img
           qemu-img resize -f raw ${{ env.PI_IMG }} +4G
-          ls checkout
-          ls checkout/test
+          chmod +x ./checkout/test/resize_pi.exp
           ./checkout/test/resize_pi.exp ${{env.PI_IMG}}
       - name: Run QEMU & install CarpenPi
         run: |
+          ls -l ./checkout/test/
           # Don't do it! It's not ready!
           #./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
       - name: Shrink final image
