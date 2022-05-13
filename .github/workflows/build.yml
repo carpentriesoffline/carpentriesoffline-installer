@@ -2,6 +2,9 @@ name: Build Carpenpi image
 on:
   release:
     types: [published]
+    branches: 
+       - main
+       - github_actions
 
 jobs:
   build:
