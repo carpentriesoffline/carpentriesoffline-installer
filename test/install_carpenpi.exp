@@ -29,7 +29,7 @@ expect $PROMPT
 send "sudo systemctl enable ssh\n"
 
 expect $PROMPT
-send "curl https://raw.githubusercontent.com/CarpenPi/WebServer/main/setup.sh > setup.sh && bash ./setup.sh\n"
+send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh && bash ./setup.sh\n"
 
 expect $PROMPT
 send "sudo poweroff\n"
