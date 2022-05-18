@@ -1,23 +1,35 @@
-#!/usr/bin/expect -f
+#!/usr/bin/expect
 
 # Wait enough (forever) until a long-time boot
 set timeout -1
 
 # Start VM
-spawn qemu-system-arm \
-  -serial stdio \
-  -M versatilepb \
-  -cpu arm1176 \
-  -m 256 \
-  -drive "file=boot.img,if=none,index=0,media=disk,format=raw,id=disk0" \
-  -drive "file=[lindex $argv 0],if=none,index=1,media=disk,format=raw,id=disk1" \
-  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
-  -device "virtio-blk-pci,drive=disk1,disable-modern=on,disable-legacy=off" \
-  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
-  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
-  -append "root=/dev/vda2 panic=1" \
-  -no-reboot \
-  -display none
+spawn qemu-system-aarch64 \
+   -m 1024 \
+   -M raspi3b \
+   -kernel kernel8.img \
+   -dtb bcm2710-rpi-3-b-plus.dtb \
+   -sd /build_img/2021-01-11-raspios-buster-armhf-lite.img \
+   -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
+   -nographic \
+   -device usb-net,netdev=net0 \
+   -no-reboot
+#-netdev user,id=net0,hostfwd=tcp::5555-:22
+
+#qemu-system-arm \
+#  -serial stdio \
+#  -M versatilepb \
+#  -cpu arm1176 \
+#  -m 256 \
+#  -drive "file=boot.img,if=none,index=0,media=disk,format=raw,id=disk0" \
+#  -drive "file=[lindex $argv 0],if=none,index=1,media=disk,format=raw,id=disk1" \
+#  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
+#  -device "virtio-blk-pci,drive=disk1,disable-modern=on,disable-legacy=off" \
+#  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
+#  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
+#  -append "root=/dev/vda2 panic=1" \
+#  -no-reboot \
+#  -display none
 
 expect "raspberrypi login: "
 send "pi\n"
@@ -28,41 +40,7 @@ send "raspberry\n"
 set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
-send "sudo fdisk /dev/vdb\n"
-
-expect "Command (m for help):"
-send "d\n"
-
-expect "Partition number (1,2, default 2):"
-send "2\n"
-
-expect "Command (m for help):"
-send "n\n"
-
-expect "Select (default p):"
-send "p\n"
-
-expect "Partition number (2-4, default 2):"
-send "2\n"
-
-#this might be super sensitive to the image being used, adjust accordingly
-expect "First sector (2048-12025855, default 2048):"
-send "532480\n"
-
-expect "Last sector, +/-sectors or +/-size{K,M,G,T,P} (532480-12025855, default 12025855): "
-send "12025855\n"
-
-expect "Do you want to remove the signature?"
-send "N\n"
-
-expect "Command (m for help):"
-send "w\n"
-
-expect $PROMPT
-send "sudo resize2fs /dev/vdb2\n"
-
-expect $PROMPT
-send "sudo fsck -f /dev/vdb2\n"
+send "sudo /usr/bin/env raspi-config --expand-rootfs\n"
 
 expect $PROMPT
 send "sudo poweroff\n"

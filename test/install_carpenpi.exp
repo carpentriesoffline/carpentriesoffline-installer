@@ -4,18 +4,30 @@
 set timeout -1
 
 # Start VM
-spawn qemu-system-arm \
-  -serial stdio \
-  -M versatilepb \
-  -cpu arm1176 \
-  -m 512 \
-  -drive "file=[lindex $argv 0],if=none,index=0,media=disk,format=raw,id=disk0" \
-  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
-  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
-  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
-  -append "root=/dev/vda2 panic=1" \
-  -no-reboot \
-  -display none
+system-aarch64 \
+   -m 1024 \
+   -M raspi3b \
+   -kernel kernel8.img \
+   -dtb bcm2710-rpi-3-b-plus.dtb \
+   -sd /build_img/2021-01-11-raspios-buster-armhf-lite.img \
+   -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
+   -nographic \
+   -device usb-net,netdev=net0 \
+   -no-reboot
+#-netdev user,id=net0,hostfwd=tcp::5555-:22
+
+#spawn qemu-system-arm \
+#  -serial stdio \
+#  -M versatilepb \
+#  -cpu arm1176 \
+#  -m 512 \
+#  -drive "file=[lindex $argv 0],if=none,index=0,media=disk,format=raw,id=disk0" \
+#  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
+#  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
+#  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
+#  -append "root=/dev/vda2 panic=1" \
+#  -no-reboot \
+#  -display none
 
 expect "raspberrypi login: "
 send "pi\n"
