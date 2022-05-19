@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #get the architecture and convert it to one of 386, armv6l or amd64 to match names in the go packages
-arch=$(lscpu | grep "^Arch" | awk '{print $2}' | sed 's/i[0-9]86/386/' | sed 's/armv[0-9]l/arm-6/' | sed 's/x86_64/amd64/')
+arch=$(lscpu | grep "^Arch" | awk '{print $2}' | sed 's/i[0-9]86/386/' | sed 's/armv[0-9]l/arm-6/' | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/' )
 
 #get the latest gitea version number
 #latest_gitea=$(curl https://dl.gitea.io/gitea/ | grep -o "Current Release [0-9]*\.[0-9]*\.[0-9]*" | head -1 |  awk '{print $3}')
