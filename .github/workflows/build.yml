@@ -11,57 +11,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Change these when updating to new version of raspberry pi OS
-      IMG_URL: https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-01-12/2021-01-11-raspios-buster-armhf-lite.zip
-      PI_ZIP: 2021-01-11-raspios-buster-armhf-lite.zip
-      PI_ZIP_CHECKSUM: d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef
-      PI_IMG: 2021-01-11-raspios-buster-armhf-lite.img
-      OUTPUT_IMG: 2021-01-11-raspios-buster-armhf-lite-carpenpi.img
-      OUTPUT_ZIP: 2021-01-11-raspios-buster-armhf-lite-carpenpi.zip
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
         with:
           path: checkout
-      - name: Cache base image
-        id: cache-image
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.PI_IMG }}.orig
-          key: ${{ env.PI_IMG }}.orig
-      - name: Download base image
-        if: steps.cache-image.outputs.cache-hit != 'true'
-        run: |
-          wget --quiet ${{ env.IMG_URL }}
-          echo "${{ env.PI_ZIP_CHECKSUM }} ${{ env.PI_ZIP }}" | sha256sum -c
-          unzip ${{ env.PI_ZIP }}
-          mv ${{ env.PI_IMG }} ${{ env.PI_IMG }}.orig
-      - name: Create clean base image
-        run: cp ${{ env.PI_IMG }}.orig ${{ env.PI_IMG }}
-      - name: Install packages
-        run: sudo apt-get install -y qemu-system-arm qemu-efi expect
-      - name: Checkout qemu pi kernels
-        uses: actions/checkout@v2
-        with:
-          repository: dhruvvyas90/qemu-rpi-kernel
-          path: qemu-rpi-kernel
-      - name: Resize image
-        run: |
-          cp ${{env.PI_IMG}} base.img
-          qemu-img resize -f raw ${{ env.PI_IMG }} +4G
-          chmod +x ./checkout/test/resize_pi.exp
-          ./checkout/test/resize_pi.exp ${{env.PI_IMG}}
-      - name: Run QEMU & install CarpenPi
-        run: |
-          ls -l ./checkout/test/
-          # Don't do it! It's not ready!
-          #./checkout/test/install_carpenpi.exp ${{env.PI_IMG}}
-      - name: Shrink final image
-        run: |
-          wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
-          chmod a+x pishrink.sh
-          sudo ./pishrink.sh ${{env.PI_IMG}} ${{env.OUTPUT_IMG}}
-          zip ${{env.OUTPUT_ZIP}} ${{env.OUTPUT_IMG}}
+      - name: Install Dependencies
+	run: unzip git wget qemu-system-arm qemu-efi expect vim-tiny fdisk e2fsprogs mtools zip xz-utils
+      - name: Build Image
+        run: | 
+           cd checkout
+          ./build_img.sh
       - name: Upload image as release
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
@@ -69,6 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{env.OUTPUT_ZIP}}
-          asset_name: ${{env.OUTPUT_ZIP}}
+          asset_path: checkout/build_img/release.zip
+          asset_name: release.zip
           asset_content_type: application/zip
