@@ -12,9 +12,7 @@ spawn qemu-system-aarch64 \
    -sd /build_img/2021-01-11-raspios-buster-armhf-lite.img \
    -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
    -nographic \
-   -device usb-net,netdev=net0 \
    -no-reboot
-#-netdev user,id=net0,hostfwd=tcp::5555-:22
 
 #qemu-system-arm \
 #  -serial stdio \
