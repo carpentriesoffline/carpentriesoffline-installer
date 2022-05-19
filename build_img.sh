@@ -1,3 +1,7 @@
+#!/bin/bash 
+
+IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-04-07/2022-04-04-raspios-bullseye-armhf-lite.img.xz
+img_name=2022-04-04-raspios-bullseye-armhf-lite.img
 
 #      - name: Download base image
 #        if: steps.cache-image.outputs.cache-hit != 'true'
@@ -18,25 +22,22 @@ cd build_img
 
 #assuming we have a checkout of the carpentries-offline repo in working directory script was started from
 
-wget --quiet https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-01-12/2021-01-11-raspios-buster-armhf-lite.zip 
-echo "d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef 2021-01-11-raspios-buster-armhf-lite.zip" | sha256sum -c
-unzip 2021-01-11-raspios-buster-armhf-lite.zip
-mv 2021-01-11-raspios-buster-armhf-lite.zip 2021-01-11-raspios-buster-armhf-lite.zip.orig
+wget $IMG_URL
 
-img_name=2021-01-11-raspios-buster-armhf-lite.img
+#the script should fail if this doesn't match
+#echo "d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef 2021-01-11-raspios-buster-armhf-lite.zip" | sha256sum -c
+
+xz -d 2022-04-04-raspios-bullseye-armhf-lite.img.xz
 
 #extract the kernel and device tree
-apt-get install mtools fdisk
-
-start_sector=`fdisk -l 2021-01-11-raspios-buster-armhf-lite.img | grep FAT32 | awk '{print $2}'`
-sector_count=`fdisk -l 2021-01-11-raspios-buster-armhf-lite.img | grep FAT32 | awk '{print $4}'`
+start_sector=`fdisk -l $img_name | grep FAT32 | awk '{print $2}'`
+sector_count=`fdisk -l $img_name | grep FAT32 | awk '{print $4}'`
 dd if=$img_name of=bootfs.img skip=$start_sector count=$sector_count bs=512 
 
 mcopy -i bootfs.img ::/bcm2710-rpi-3-b-plus.dtb .
 mcopy -i bootfs.img ::/kernel8.img .
 
 #qemu-system-aarch64 -m 1024 -M raspi3b -kernel kernel8.img -dtb bcm2710-rpi-3-b-plus.dtb -sd /build_img/2021-01-11-raspios-buster-armhf-lite.img -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" -nographic -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5555-:22
-
 
 #      - name: Resize image
 #        run: |
@@ -47,7 +48,7 @@ mcopy -i bootfs.img ::/kernel8.img .
 
 cp $img_name boot.img
 chmod +x ../test/resize_pi.exp
-qemu-img resize -f raw $img_name +4G
+qemu-img resize -f raw $img_name 8G
 
 #let the system boot up once to resize the partition
 cat ../test/resize_pi.exp
@@ -83,6 +84,7 @@ dd if=$img_name of=boot.img count=$start_sector bs=512 status=progress
 echo "extracting os filesystem"
 dd if=$img_name of=fs.img skip=$start_sector count=$size bs=512 status=progress
 
+e2fsck fs.img
 resize2fs -M fs.img
 
 echo "combining images"
