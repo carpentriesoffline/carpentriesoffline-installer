@@ -96,7 +96,7 @@ size=`fdisk -l $img_name | tail -1 | awk '{print $4}'`
 
 echo "extracting boot filesystem"
 
-dd if=$img_name of=boot.img count=$start_sector bs=512 status=progress
+dd if=$img_name of=bootfs.img count=$start_sector bs=512 status=progress
 
 
 echo "extracting os filesystem"
@@ -106,7 +106,7 @@ e2fsck fs.img
 resize2fs -M fs.img
 
 echo "combining images"
-cat boot.img fs.img > combined.img
+cat bootfs.img fs.img > combined.img
 
 echo "shrinking partition"
 ../test/shrink_part.exp combined.img
