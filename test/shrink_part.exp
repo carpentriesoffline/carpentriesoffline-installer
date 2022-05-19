@@ -1,4 +1,4 @@
-expect
+#!/usr/bin/expect
 
 # Wait enough (forever) until a long-time boot
 set timeout -1
