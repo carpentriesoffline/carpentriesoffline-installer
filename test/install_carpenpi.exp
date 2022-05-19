@@ -4,7 +4,7 @@
 set timeout -1
 
 # Start VM
-system-aarch64 \
+spawn qemu-system-aarch64 \
    -m 1024 \
    -M raspi3b \
    -kernel kernel8.img \
@@ -13,8 +13,8 @@ system-aarch64 \
    -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
    -nographic \
    -device usb-net,netdev=net0 \
+   -netdev user,id=net0,hostfwd=tcp::5555-:22 \
    -no-reboot
-#-netdev user,id=net0,hostfwd=tcp::5555-:22
 
 #spawn qemu-system-arm \
 #  -serial stdio \
