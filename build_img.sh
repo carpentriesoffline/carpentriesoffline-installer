@@ -29,13 +29,32 @@ wget $IMG_URL
 
 xz -d 2022-04-04-raspios-bullseye-armhf-lite.img.xz
 
+echo "Extracting kernel/device tree and setting password"
 #extract the kernel and device tree
 start_sector=`fdisk -l $img_name | grep FAT32 | awk '{print $2}'`
 sector_count=`fdisk -l $img_name | grep FAT32 | awk '{print $4}'`
-dd if=$img_name of=bootfs.img skip=$start_sector count=$sector_count bs=512 
+dd if=$img_name of=bootsector.img count=$start_sector bs=512
+dd if=$img_name of=bootfs.img skip=$start_sector count=$sector_count bs=512
+dd if=$img_name of=os.img skip=$[$start_sector+$sector_count] bs=512 status=progress
 
 mcopy -i bootfs.img ::/bcm2710-rpi-3-b-plus.dtb .
 mcopy -i bootfs.img ::/kernel8.img .
+echo "Extracted Device Tree and Kernel"
+
+#setup a password
+#https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/
+
+password=`echo 'raspberry' | openssl passwd -6 -stdin`
+echo "pi:$password" > userconf
+mcopy -i bootfs.img userconf ::/
+
+#rebuild the image
+mv $img_name $img_name.orig
+cat bootsector.img bootfs.img os.img >> $img_name
+rm os.img bootsector.img
+echo "Updated image with password set"
+
+
 
 #qemu-system-aarch64 -m 1024 -M raspi3b -kernel kernel8.img -dtb bcm2710-rpi-3-b-plus.dtb -sd /build_img/2021-01-11-raspios-buster-armhf-lite.img -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" -nographic -device usb-net,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5555-:22
 
@@ -46,7 +65,6 @@ mcopy -i bootfs.img ::/kernel8.img .
 #          chmod +x ./checkout/test/resize_pi.exp
 #          ./checkout/test/resize_pi.exp ${{env.PI_IMG}}
 
-cp $img_name boot.img
 chmod +x ../test/resize_pi.exp
 qemu-img resize -f raw $img_name 8G
 
