@@ -30,12 +30,16 @@ spawn qemu-system-aarch64 \
 #  -display none
 
 expect "raspberrypi login: "
+sleep 30
 send "pi\n"
 
 expect "Password: "
 send "raspberry\n"
 
 set PROMPT "pi@raspberrypi:~$ "
+
+expect $PROMPT
+send "sudo systemctl enable ssh\n"
 
 expect $PROMPT
 send "sudo /usr/bin/env raspi-config --expand-rootfs\n"

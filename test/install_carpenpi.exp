@@ -38,10 +38,10 @@ send "raspberry\n"
 set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
-send "sudo systemctl enable ssh\n"
+send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh"
 
-expect $PROMPT
-send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh && bash ./setup.sh\n"
+expect $PROMPT 
+send " bash ./setup.sh | tee install.log\n"
 
 expect $PROMPT
 send "sudo poweroff\n"
