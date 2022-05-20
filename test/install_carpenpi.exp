@@ -38,7 +38,7 @@ send "raspberry\n"
 set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
-send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh"
+send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh\n"
 
 expect $PROMPT 
 send " bash ./setup.sh | tee install.log\n"
