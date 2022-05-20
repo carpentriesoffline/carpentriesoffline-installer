@@ -8,4 +8,4 @@ RUN apt-get update && \
 COPY test /test
 COPY build_img.sh /
 
-#RUN /build_img.sh
+ENTRYPOINT /build_img.sh
