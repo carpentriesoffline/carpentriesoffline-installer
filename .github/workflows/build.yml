@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install unzip git wget qemu-system-arm qemu-efi expect vim-tiny fdisk e2fsprogs mtools zip xz-utils
     - name: Build Image
       run: | 
-        cd checkout
+        cd checkout/build_img
         sudo ./build_img.sh
     - name: Upload image as release
       id: upload-release-asset 
