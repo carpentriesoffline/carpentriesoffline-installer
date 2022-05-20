@@ -40,8 +40,12 @@ set PROMPT "pi@raspberrypi:~$ "
 expect $PROMPT
 send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh\n"
 
+#install more utils to get us the ts command for timestamping logs
+expect $PROMPT
+send "apt-get update ; apt-get install moreutils"
+
 expect $PROMPT 
-send " bash ./setup.sh | tee install.log\n"
+send "bash ./setup.sh | ts | tee install.log\n"
 
 expect $PROMPT
 send "sudo poweroff\n"
