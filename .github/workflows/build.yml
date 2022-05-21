@@ -21,7 +21,7 @@ jobs:
       run: | 
         cd checkout
         mkdir output
-        sudo bash -x build_img/build_img.sh output
+        sudo bash -x build_img/build_img.sh $PWD/output
     - name: Upload image as release
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
