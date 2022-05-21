@@ -88,5 +88,9 @@ echo "Exporting Finish Image"
 mv $img_name $img_name.fullsize
 mv combined.img $img_name
 
+ls -ld $OUTPUT_DIR
+
+touch $OUTPUT_DIR/test
+
 zip -9 $OUTPUT_DIR/release.zip $img_name
 
