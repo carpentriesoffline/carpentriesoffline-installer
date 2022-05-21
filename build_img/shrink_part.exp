@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 # Wait enough (forever) until a long-time boot
-set timeout -1
+set timeout 60
 
 # Start VM
 spawn fdisk [lindex $argv 0]
