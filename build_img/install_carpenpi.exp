@@ -42,7 +42,7 @@ send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffli
 
 #install more utils to get us the ts command for timestamping logs
 expect $PROMPT
-send "apt-get update ; apt-get install moreutils"
+send "apt-get update ; apt-get install moreutils\n"
 
 expect $PROMPT 
 send "bash ./setup.sh | ts | tee install.log\n"
