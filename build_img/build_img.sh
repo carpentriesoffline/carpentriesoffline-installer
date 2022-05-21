@@ -74,7 +74,7 @@ dd if=$img_name of=bootfs.img count=$start_sector bs=512 status=progress
 echo "Extracting os filesystem"
 dd if=$img_name of=fs.img skip=$start_sector count=$size bs=512 status=progress
 
-e2fsck fs.img
+e2fsck -p fs.img
 resize2fs -M fs.img
 
 echo "Combining Images"
