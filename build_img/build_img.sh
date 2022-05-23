@@ -26,6 +26,12 @@ wget $IMG_URL
 
 xz -d 2022-04-04-raspios-bullseye-armhf-lite.img.xz
 
+echo "Expanding Disk"
+qemu-img resize -f raw $img_name 8G
+
+echo "Resizing Partition"
+./shrink_part.exp $img_name
+
 echo "Extracting kernel/device tree and setting password"
 start_sector=`fdisk -l $img_name | grep FAT32 | awk '{print $2}'`
 sector_count=`fdisk -l $img_name | grep FAT32 | awk '{print $4}'`
@@ -44,19 +50,20 @@ password=`echo 'raspberry' | openssl passwd -6 -stdin`
 echo "pi:$password" > userconf
 mcopy -i bootfs.img userconf ::/
 
-#rebuild the image with our password set
+#expand the filesystem
+echo "Expanding Filesystem"
+e2fsck -p os.img
+resize2fs -p  os.img
+
+#rebuild the image
+echo "Rebuilding Image"
 mv $img_name $img_name.orig
 cat bootsector.img bootfs.img os.img >> $img_name
 rm os.img bootsector.img
-qemu-img resize -f raw $img_name 8G
+
 echo "Updated image with password set"
 
-#let the system boot up once to resize the partition
-./resize_pi.exp $img_name
-echo "Resized Partitons"
 
-reset
-clear
 
 #install carpenpi
 ./install_carpenpi.exp $img_name
@@ -84,7 +91,7 @@ echo "Shrinking Partition"
 ./shrink_part.exp combined.img
 
 
-echo "Exporting Finish Image"
+echo "Exporting Finished Image"
 mv $img_name $img_name.fullsize
 mv combined.img $img_name
 
