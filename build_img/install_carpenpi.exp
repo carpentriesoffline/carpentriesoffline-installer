@@ -1,4 +1,4 @@
-#!/usr/bin/expect -f
+#!/usr/bin/expect
 
 # Wait enough (forever) until a long-time boot
 set timeout -1
@@ -16,19 +16,6 @@ spawn qemu-system-aarch64 \
    -netdev user,id=net0,hostfwd=tcp::5555-:22 \
    -no-reboot
 
-#spawn qemu-system-arm \
-#  -serial stdio \
-#  -M versatilepb \
-#  -cpu arm1176 \
-#  -m 512 \
-#  -drive "file=[lindex $argv 0],if=none,index=0,media=disk,format=raw,id=disk0" \
-#  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
-#  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
-#  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
-#  -append "root=/dev/vda2 panic=1" \
-#  -no-reboot \
-#  -display none
-
 expect "raspberrypi login: "
 sleep 30
 send "pi\n"
@@ -37,9 +24,6 @@ expect "Password: "
 send "raspberry\n"
 
 set PROMPT "pi@raspberrypi:~$ "
-
-expect $PROMPT
-send "systemctl status resize2fs_once.service\n"
 
 expect $PROMPT
 send "df -h\n"
@@ -58,3 +42,4 @@ expect $PROMPT
 send "sudo poweroff\n"
 
 interact
+
