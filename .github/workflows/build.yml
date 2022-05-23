@@ -19,6 +19,7 @@ jobs:
       with:
         path: checkout
     - name: Install Dependencies
+      if: startsWith(github.ref, 'refs/tags/')  
       run: sudo apt-get install unzip git wget qemu-system-arm qemu-efi expect vim-tiny fdisk e2fsprogs mtools zip xz-utils
     - name: Build Image
       if: startsWith(github.ref, 'refs/tags/')    
