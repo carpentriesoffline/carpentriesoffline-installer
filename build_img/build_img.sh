@@ -59,7 +59,7 @@ reset
 clear
 
 #install carpenpi
-#./install_carpenpi.exp $img_name
+./install_carpenpi.exp $img_name
 
 echo "Installed Software"
 
