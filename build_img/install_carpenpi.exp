@@ -38,6 +38,12 @@ send "raspberry\n"
 set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
+send "systemctl status resize2fs_once.service\n"
+
+expect $PROMPT
+send "df -h\n"
+
+expect $PROMPT
 send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh\n"
 
 #install more utils to get us the ts command for timestamping logs
