@@ -1,0 +1,45 @@
+#!/usr/bin/expect
+
+# Wait enough (forever) until a long-time boot
+set timeout -1
+
+# Start VM
+spawn qemu-system-aarch64 \
+   -m 1024 \
+   -M raspi3b \
+   -kernel kernel8.img \
+   -dtb bcm2710-rpi-3-b-plus.dtb \
+   -sd [lindex $argv 0] \
+   -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
+   -nographic \
+   -device usb-net,netdev=net0 \
+   -netdev user,id=net0,hostfwd=tcp::5555-:22 \
+   -no-reboot
+
+expect "raspberrypi login: "
+sleep 30
+send "pi\n"
+
+expect "Password: "
+send "raspberry\n"
+
+set PROMPT "pi@raspberrypi:~$ "
+
+expect $PROMPT
+send "df -h\n"
+
+expect $PROMPT
+send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh\n"
+
+#install more utils to get us the ts command for timestamping logs
+expect $PROMPT
+send "sudo apt-get -y update ; sudo apt-get -y install moreutils\n"
+
+expect $PROMPT 
+send "bash ./setup.sh | ts | tee install.log\n"
+
+expect $PROMPT
+send "sudo poweroff\n"
+
+interact
+

@@ -1,0 +1,50 @@
+#!/usr/bin/expect
+
+# Wait enough (forever) until a long-time boot
+set timeout 600
+
+# Start VM
+spawn qemu-system-aarch64 \
+   -m 1024 \
+   -M raspi3b \
+   -kernel kernel8.img \
+   -dtb bcm2710-rpi-3-b-plus.dtb \
+   -sd [lindex $argv 0] \
+   -append "console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
+   -nographic \
+   -no-reboot
+
+#qemu-system-arm \
+#  -serial stdio \
+#  -M versatilepb \
+#  -cpu arm1176 \
+#  -m 256 \
+#  -drive "file=boot.img,if=none,index=0,media=disk,format=raw,id=disk0" \
+#  -drive "file=[lindex $argv 0],if=none,index=1,media=disk,format=raw,id=disk1" \
+#  -device "virtio-blk-pci,drive=disk0,disable-modern=on,disable-legacy=off" \
+#  -device "virtio-blk-pci,drive=disk1,disable-modern=on,disable-legacy=off" \
+#  -dtb qemu-rpi-kernel/versatile-pb-buster-5.4.51.dtb \
+#  -kernel qemu-rpi-kernel/kernel-qemu-5.4.51-buster \
+#  -append "root=/dev/vda2 panic=1" \
+#  -no-reboot \
+#  -display none
+
+expect "raspberrypi login: "
+sleep 30
+send "pi\n"
+
+expect "Password: "
+send "raspberry\n"
+
+set PROMPT "pi@raspberrypi:~$ "
+
+expect $PROMPT
+send "sudo systemctl enable ssh\n"
+
+expect $PROMPT
+send "sudo /usr/bin/env raspi-config --expand-rootfs\n"
+
+expect $PROMPT
+send "sudo poweroff\n"
+
+interact
