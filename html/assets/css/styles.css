@@ -1,0 +1,44 @@
+body {
+  /* border: 1px solid rgb(7, 17, 89); */
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logo {
+  /* border: 1px solid red; */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.titleblock {
+  /* border: 1px solid red; */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background: rgb(7, 17, 89);
+  font-family: 'Oswald', "Arial","Helvetica",'sans-serif';
+  font-size: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  font-family: 'Oswald', "Arial","Helvetica",'sans-serif';
+
+}
+
+.grid-container > div {
+  border: 1px solid rgb(7, 17, 89);
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+}
+
+li {
+    text-align: left;
+}
