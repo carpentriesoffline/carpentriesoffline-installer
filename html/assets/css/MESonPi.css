@@ -1,0 +1,23 @@
+/* This is all a hack for the purpose of a 2-day hackathon
+It is recognised that much more work is needed to refactor
+the CSS and HTML */
+.icon-browser:before, .icon-github:before, .icon-eye:before, .icon-plus:before, .icon-top:before {
+  background-repeat: no-repeat;
+  display: inline-block;
+  content:"";
+}
+.icon-browser:before, .icon-github:before, .icon-eye:before, .icon-plus:before {
+  background-size: 14px 14px;
+  width: 14px;
+  height: 14px;
+}
+.icon-browser:before		{background-image: url('/assets/img/icon-browser.svg');}
+.icon-github:before			{background-image: url('/assets/img/icon-github.svg');}
+.icon-eye:before				{background-image: url('/assets/img/icon-eye.svg');}
+.icon-plus:before				{background-image: url('/assets/img/icon-plus.svg');}
+.icon-top:before				{
+  background-image: url('/assets/img/icon-top.png');
+  background-size: 30px 14px;
+  width: 30px;
+  height: 14px;
+}
