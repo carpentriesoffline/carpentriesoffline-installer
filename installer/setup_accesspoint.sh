@@ -6,7 +6,7 @@
 grep "Raspberry" /proc/cpuinfo > /dev/null
 if [ "$?" = "0" ] ; then
   # install packages, hostap for running the access point, isc-dhcp-server to provide IP addresses and NTP to provide time configuration
-  apt -y install hostapd dnsmasq ntp
+  apt -y install hostapd dnsmasq ntp iptables
 
   # copy config files
   cp access_point_files/interfaces /etc/network/
