@@ -3,8 +3,7 @@
 # script to install software/config to setup an access point on the Pi
 
 # ensure we are running on a pi
-grep "Raspberry" /proc/cpuinfo > /dev/null
-if [ "$?" = "0" ] ; then
+if grep -q "Raspberry" /proc/cpuinfo ; then
   # install packages, hostap for running the access point, isc-dhcp-server to provide IP addresses and NTP to provide time configuration
   apt -y install hostapd dnsmasq ntp iptables
 
