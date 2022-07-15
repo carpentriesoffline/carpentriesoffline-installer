@@ -3,16 +3,14 @@
 #script to configure Raspberry Pi related settings
 
 #are we on a raspberry pi?
-grep "Raspberry" /proc/cpuinfo > /dev/null
-if [ "$?" = "0" ] ; then
+if grep -q "Raspberry" /proc/cpuinfo ; then
     echo "Found a Raspberry Pi, doing Raspberry Pi specific config"
 
     #reduce GPU memory to 8MB since we aren't using a GUI
-    grep "gpu_mem" /boot/config.txt > /dev/null
-    if [ "$?" = "0" ] ; then
-        sudo sed -i 's/gpu_mem=[0-9]/gpu_mem=8/' /boot/config.txt
+    if grep -q "gpu_mem" /boot/config.txt ; then
+        sudo sed -i 's/gpu_mem=[0-9]*/gpu_mem=8/' /boot/config.txt
     else
-        echo "gpu_mem=8" | tee -a /boot/config.txt
+        echo "gpu_mem=8" | sudo tee -a /boot/config.txt
     fi
 
     #turn off bluetooth, we aren't using it
