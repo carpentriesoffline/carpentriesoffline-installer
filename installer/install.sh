@@ -1,5 +1,7 @@
 #!/bin/bash
 
+start_time=`date +s`
+
 #install any pending updates first
 sudo apt update -y
 sudo apt upgrade -y
@@ -33,5 +35,8 @@ echo "Setting up Access Point"
 sudo ./setup_accesspoint.sh
 clear
 
+end_time=`date +s`
+
+echo "Installation took $[$end_time-$start_time] seconds"
 echo "Done, rebooting"
 sudo reboot

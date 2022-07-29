@@ -1,3 +1,5 @@
+#dockerfile for raspberry pi image builder
+#bind /output to where you want the resulting image to be stored
 from ubuntu:22.04 
 
 

@@ -1,4 +1,6 @@
 #!/bin/bash 
+#script to build a raspberry pi image using qemu
+
 
 #before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi expect 
 
