@@ -1,0 +1,9 @@
+
+#build the docker image
+docker build -t carpentries-offline:latest .
+
+#create a directory to store images
+mkdir output
+
+#run docker image
+docker run -it --mount type=bind,source="$(pwd)"/output,target=/output carpentries-offline
