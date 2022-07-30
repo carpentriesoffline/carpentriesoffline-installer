@@ -9,7 +9,7 @@ RUN apt-get update && \
     mkdir /output && \
     mkdir /build_img
 
-COPY build_img.sh /build_img
+COPY *.sh /build_img
 COPY *.exp /build_img/
 
 ENTRYPOINT build_img/build_img.sh /output
