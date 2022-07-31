@@ -17,7 +17,9 @@ spawn qemu-system-aarch64 \
    -no-reboot
 
 expect "raspberrypi login: "
-sleep 30
+#the prompt appears quite a while before boot finishes
+#on the first boot the setting of the password happens near the end of the boot sequence
+sleep 90
 send "pi\n"
 
 expect "Password: "
