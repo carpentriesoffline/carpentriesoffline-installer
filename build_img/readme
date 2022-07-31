@@ -6,4 +6,4 @@ docker build -t carpentries-offline:latest .
 mkdir output
 
 #run docker image
-docker run -it --mount type=bind,source="$(pwd)"/output,target=/output carpentries-offline
+docker run -it --mount type=bind,source="$(pwd)"/output,target=/output carpentries-offline:latest
