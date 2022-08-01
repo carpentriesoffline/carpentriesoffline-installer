@@ -39,4 +39,10 @@ end_time=`date +s`
 
 echo "Installation took $[$end_time-$start_time] seconds"
 echo "Done, rebooting"
-sudo reboot
+
+if [ -f /.dockerenv ] ; then
+    #don't try to reboot docker
+    exit 0
+else 
+    sudo reboot
+fi
