@@ -40,11 +40,33 @@ network={
 ## Change the password
 * Run the passwd command. Leaving the default password will mean anybody in your workshop can login to your Pi and change settings on it.
 
-
 ## Connect to Carpentries Offline
 * After installing the Raspberry Pi will reboot.
 * It will then switch the WiFi interface to access point mode and will be available as a network called carpentries-offline. 
 * Connect to the carpenpi WiFi network
 * Visting http://carpentries-offline.org or http://192.168.1.1
 * You should get links to the Carpentries Lessons and the Gitea server on the Raspberry Pi
+
+## Using pre-built images
+There are pre-built images available from the releases section of this page. These are experimental and unlikely to be fully working yet. 
+
+# Development Status
+
+Carpentries offline is still under development and is not yet ready for general use. Here is the general state of each component:
+
+(last updated 2022-01-08)
+
+| Component    | Status  |
+| ------------ | ------- |
+| Access Point | Works, possible performance issues |
+| Course Notes | Working |
+| MiniCRAN repository | Not Working |
+| Pip Repository | ? |
+| R/R studio downloads | Working | 
+| Python downloads  | ? |
+| Workshop Surveys | Still to do | 
+| Etherpad | Work in progress | 
+| Jupyter Lab | Work in progress |
+| Auto build image via qemu | Work in progress | 
+| Dockerfile for cloud deployment | Still to do |
 
