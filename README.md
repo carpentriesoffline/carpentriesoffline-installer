@@ -60,10 +60,10 @@ Carpentries offline is still under development and is not yet ready for general 
 | ------------ | ------- |
 | Access Point | Works, possible performance issues |
 | Course Notes | Working |
-| MiniCRAN repository | Not Working |
-| Pip Repository | ? |
+| MiniCRAN repository | Needs Testing |
+| Pip Repository | Needs Testing |
 | R/R studio downloads | Working | 
-| Python downloads  | ? |
+| Python downloads  | Working |
 | Workshop Surveys | Still to do | 
 | Etherpad | Work in progress | 
 | Jupyter Lab | Work in progress |
