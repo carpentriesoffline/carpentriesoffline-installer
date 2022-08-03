@@ -25,7 +25,7 @@
 		<div>
 			<h2>Services</h2>
 			<ul>
-				<li><a href="http://carpentries-offline.org:3000">Gitea</a></li>
+				<li><a href="http://carpentries-offline.org:3000" id="gitea_link">Gitea</a></li>
 			</ul>
 		</div>
 		<div>
@@ -37,6 +37,14 @@
 			</ul>
 		</div>
 	</div>
+
+    <script>
+	//change the gitea link to reflect where the webpage is being served from
+	//useful for non-standard locations like docker or cloud hosts or SSH port forwards
+        alert(window.location.hostname);
+	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
+    </script>
+
 </body>
 
 </html>
