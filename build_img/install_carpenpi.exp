@@ -14,6 +14,8 @@ spawn qemu-system-aarch64 \
    -nographic \
    -device usb-net,netdev=net0 \
    -netdev user,id=net0,hostfwd=tcp::5555-:22 \
+   -device usb-storage,drive=offlinedatasci \
+   -drive if=none,id=offlinedatasci,format=raw,file=offlinedatasci.img \
    -no-reboot
 
 expect "raspberrypi login: "
@@ -29,6 +31,21 @@ set PROMPT "pi@raspberrypi:~$ "
 
 expect $PROMPT
 send "df -h\n"
+
+#extract the offlinedatasci image
+expect $PROMPT
+send "sudo mount /dev/sda /mnt\n"
+
+expect $PROMPT
+send "sudo mkdir -p /var/www/html\n"
+
+expect $PROMPT
+send "cd /var/www/html\n"
+
+expect $PROMPT
+send "sudo tar xvf /mnt/offlinedatasci.tar\n"
+
+#run the main installer
 
 expect $PROMPT
 send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffline-installer/main/setup.sh > setup.sh\n"

@@ -66,6 +66,19 @@ rm os.img bootsector.img
 echo "Updated image with password set"
 
 
+#grab offline datasci from outside of qemu, it is faster and more reliable
+qemu-img create -f raw offlinedatasci.img 
+
+apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
+pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
+mkdir offlinedatasci
+cd offlinedatasci
+offlinedatasci install all .
+tar cvf ../offlinedatasci.tar *
+cd ..
+qemu-img create -f raw offlinedatasci.img 2G
+mkfs.vfat offlinedatasci.img
+mcopy -i offlinedatasci.img offlinedatasci/offlinedatasci.tar ::/
 
 #install carpenpi
 ./install_carpenpi.exp $img_name
