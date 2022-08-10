@@ -78,7 +78,7 @@ tar cvf ../offlinedatasci.tar *
 cd ..
 qemu-img create -f raw offlinedatasci.img 2G
 mkfs.vfat offlinedatasci.img
-mcopy -i offlinedatasci.img offlinedatasci/offlinedatasci.tar ::/
+mcopy -i offlinedatasci.img offlinedatasci.tar ::/
 
 #install carpenpi
 ./install_carpenpi.exp $img_name

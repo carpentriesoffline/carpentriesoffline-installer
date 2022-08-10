@@ -29,21 +29,23 @@ send "raspberry\n"
 
 set PROMPT "pi@raspberrypi:~$ "
 
-expect $PROMPT
-send "df -h\n"
 
 #extract the offlinedatasci image
 expect $PROMPT
 send "sudo mount /dev/sda /mnt\n"
+sleep 2
+
+expect $PROMPT
+send "df -h\n"
+sleep 2
 
 expect $PROMPT
 send "sudo mkdir -p /var/www/html\n"
+sleep 2
 
 expect $PROMPT
-send "cd /var/www/html\n"
-
-expect $PROMPT
-send "sudo tar xvf /mnt/offlinedatasci.tar\n"
+send "cd /var/www/html ; sudo tar xvf /mnt/offlinedatasci.tar ; cd -\n"
+sleep 2
 
 #run the main installer
 
