@@ -54,7 +54,7 @@ There are pre-built images available from the releases section of this page. The
 
 Carpentries offline is still under development and is not yet ready for general use. Here is the general state of each component:
 
-(last updated 2022-01-08)
+(last updated 2022-08-11)
 
 | Component    | Status  |
 | ------------ | ------- |
@@ -68,5 +68,5 @@ Carpentries offline is still under development and is not yet ready for general 
 | Etherpad | Work in progress | 
 | Jupyter Lab | Work in progress |
 | Auto build image via qemu | Work in progress | 
-| Dockerfile for cloud deployment | Still to do |
+| Dockerfile for cloud deployment | Working, needs documenting |
 
