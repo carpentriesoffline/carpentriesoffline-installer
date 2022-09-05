@@ -41,8 +41,7 @@
     <script>
 	//change the gitea link to reflect where the webpage is being served from
 	//useful for non-standard locations like docker or cloud hosts or SSH port forwards
-        alert(window.location.hostname);
-	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
+ 	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
     </script>
 
 </body>
