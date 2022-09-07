@@ -114,6 +114,6 @@ ls -ld $OUTPUT_DIR
 
 touch $OUTPUT_DIR/test
 
-#zip -dd -9 $OUTPUT_DIR/release.zip $img_name
-xz -v -z $img_name 
-mv $img_name.xz $OUTPUT_DIR/release.xz
+zip -dd -9 -s 2G $OUTPUT_DIR/release $img_name
+#xz -v -z $img_name 
+#mv $img_name.xz $OUTPUT_DIR/release.xz
