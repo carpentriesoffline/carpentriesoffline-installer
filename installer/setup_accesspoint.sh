@@ -26,10 +26,10 @@ if [ "$?" = "0" ] ; then
   systemctl disable wpa_supplicant
   #we don't need dhcpcd either as the interfaces file invokes dhclient instead
   systemctl disable dhcpcd
-  
+
   #make sure rfkill doesn't disable the wifi
-  echo -n " systemd.restore_state=0 rfkill.default_state=1" >> /boot/cmdline.txt
-  
+  awk '{print $0" systemd.restore_state=0 rfkill.default_state=1"}' /boot/cmdline.txt
+
 else
   echo "Not configuring access point mode as we aren't on a Raspberry Pi"
 fi

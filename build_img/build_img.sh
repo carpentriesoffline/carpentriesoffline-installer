@@ -2,7 +2,7 @@
 #script to build a raspberry pi image using qemu
 
 
-#before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi expect 
+#before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi expect xz-utils
 
 #check arguments are right
 if [ "$#" != "1" ] ; then
@@ -77,7 +77,7 @@ echo "Updated image with password set"
 #grab offline datasci from outside of qemu, it is faster and more reliable
 qemu-img create -f raw offlinedatasci.img 
 
-apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
+apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools 
 pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
 mkdir offlinedatasci
 cd offlinedatasci
@@ -122,5 +122,7 @@ ls -ld $OUTPUT_DIR
 
 touch $OUTPUT_DIR/test
 
-zip -dd -9 "$OUTPUT_DIR/$OUTFILE" $img_name
+zip -dd -9 -s 2047m $OUTPUT_DIR/release $img_name
+#xz -v -z $img_name 
+#mv $img_name.xz $OUTPUT_DIR/release.xz
 

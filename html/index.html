@@ -6,6 +6,9 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Domine">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">-->
 	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<!-- Favicon Icon -->
+	<link rel="shortcut icon" href="./assets/images/favi-con.png" type="image/x-icon">
+	
 </head>
 
 <body>
@@ -41,8 +44,7 @@
     <script>
 	//change the gitea link to reflect where the webpage is being served from
 	//useful for non-standard locations like docker or cloud hosts or SSH port forwards
-        alert(window.location.hostname);
-	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
+ 	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
     </script>
 
 </body>

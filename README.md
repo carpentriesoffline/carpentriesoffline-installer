@@ -49,6 +49,13 @@ network={
 
 ## Using pre-built images
 There are pre-built images available from the releases section of this page. These are experimental and unlikely to be fully working yet. 
+These are built as multipart zip files with names like release.zip and release.z01, this is due to a 2GB upload limit in our build process. Download each of these. To extract them on a Linux system run the following:
+
+`cat release.z01 release.zip > carpentries-offline.zip`
+
+`unzip carpentries-offline.zip`
+
+After you have downloaded and unzipped the image files, write the image file to an SD card with [Etcher](https://www.balena.io/etcher/) or your image writing program of choice. 
 
 # Development Status
 
