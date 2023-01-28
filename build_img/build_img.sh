@@ -10,6 +10,14 @@ if [ "$#" != "1" ] ; then
     exit 1
 fi
 
+# get GIT_TAG if set, otherwise set to empty variable
+GIT_TAG=${GIT_TAG:-}
+
+if [ -z "$GIT_TAG" ]; then
+    OUTFILE=release.zip
+else
+    OUTFILE="release-$GIT_TAG.zip"
+fi
 
 OUTPUT_DIR=$1
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-04-07/2022-04-04-raspios-bullseye-armhf-lite.img.xz
@@ -117,3 +125,4 @@ touch $OUTPUT_DIR/test
 zip -dd -9 -s 2047m $OUTPUT_DIR/release $img_name
 #xz -v -z $img_name 
 #mv $img_name.xz $OUTPUT_DIR/release.xz
+
