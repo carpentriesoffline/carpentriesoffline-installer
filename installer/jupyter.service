@@ -1,0 +1,26 @@
+[Unit]
+Description=Jupyter Lab
+After=syslog.target
+After=network.target
+
+[Service]
+# Modify these two values and uncomment them if you have
+# repos with lots of files and get an HTTP error 500 because
+# of that
+###
+#LimitMEMLOCK=infinity
+#LimitNOFILE=65535
+RestartSec=2s
+Type=simple
+User=jupyter
+Group=jupyter
+WorkingDirectory=/home/jupyter/
+# If using Unix socket: tells systemd to create the /run/gitea folder, which will contain the gitea.sock file
+# (manually creating /run/gitea doesn't work, because it would not persist across reboots)
+#RuntimeDirectory=gitea
+ExecStart=/home/jupyter/.local/bin/jupyter-lab --ip=0.0.0.0
+Restart=always
+Environment=USER=jupyter HOME=/home/jupyter
+
+[Install]
+WantedBy=multi-user.target

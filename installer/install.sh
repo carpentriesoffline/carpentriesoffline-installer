@@ -39,6 +39,13 @@ clear
 
 end_time=`date +s`
 
+echo "Setting up etherpad"
+sudo ./setup_etherpad.sh
+
+echo "Setting up Jupyter"
+sudo ./setup_jupyter.sh
+
+
 echo "Installation took $[$end_time-$start_time] seconds"
 echo "Done, rebooting"
 
