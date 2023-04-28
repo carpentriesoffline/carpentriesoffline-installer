@@ -79,9 +79,16 @@ Carpentries offline is still under development and is not yet ready for general 
 
 # How to build a Docker file
 
-wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/setup.sh
-wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/docker-startup.sh
-wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/Dockerfile
-chmod +x setup.sh
-chmod +x docker-startup.sh
-docker build -t colinsauze/carpentries-offlines:openrefine .
+`wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/setup.sh`
+
+`wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/docker-startup.sh`
+
+`wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/Dockerfile`
+
+`chmod +x setup.sh`
+
+`chmod +x docker-startup.sh`
+
+`docker build -t colinsauze/carpentries-offlines:openrefine .`
+
+`docker run -d -p 3333:3333 -p 80:80 -p 8888:8888 -p 3000:3000 colinsauze/carpentries-offlines:openrefine`
