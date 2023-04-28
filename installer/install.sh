@@ -48,6 +48,8 @@ sudo ./setup_jupyter.sh
 echo "Setting up Openrefine"
 sudo ./setup_openrefine.sh
 
+echo "Setting up RStudio"
+sudo ./setup_rstudio.sh
 
 echo "Installation took $[$end_time-$start_time] seconds"
 echo "Done, rebooting"
