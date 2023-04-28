@@ -32,6 +32,7 @@
 				<li><a href="http://carpentries-offline.org:3333" id="openrefine_link">Openrefine</a></li>
 				<li><a href="http://carpentries-offline.org:8888" id="jupyter_link">Jupyter Lab</a></li>
 				<li><a href="http://carpentries-offline.org:9001" id="etherpad_link">Etherpad</a></li>
+				<li><a href="http://carpentries-offline.org:8787" id="rstudio_link">R Studio Server</a></li>				
 			</ul>
 		</div>
 		<div>
@@ -48,6 +49,10 @@
 	//change the gitea link to reflect where the webpage is being served from
 	//useful for non-standard locations like docker or cloud hosts or SSH port forwards
  	document.getElementById("gitea_link").setAttribute("href", "http://" + window.location.hostname + ":3000");
+	document.getElementById("openrefine_link").setAttribute("href", "http://" + window.location.hostname + ":3333");
+	document.getElementById("jupyter_link").setAttribute("href", "http://" + window.location.hostname + ":8888");
+	document.getElementById("etherpad_link").setAttribute("href", "http://" + window.location.hostname + ":9001");	    
+	document.getElementById("rstudio_link").setAttribute("href", "http://" + window.location.hostname + ":8787");	    	    
     </script>
 
 </body>
