@@ -77,3 +77,11 @@ Carpentries offline is still under development and is not yet ready for general 
 | Auto build image via qemu | Work in progress | 
 | Dockerfile for cloud deployment | Working, needs documenting |
 
+# How to build a Docker file
+
+wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/setup.sh
+wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/docker-startup.sh
+wget https://github.com/carpentriesoffline/carpentriesoffline-installer/raw/openrefine/Dockerfile
+chmod +x setup.sh
+chmod +x docker-startup.sh
+docker build -t colinsauze/carpentries-offlines:openrefine .
