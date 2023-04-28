@@ -14,7 +14,7 @@ if [ $(lscpu | grep "^Arch" | awk '{print $2}') = "i686" ] ; then
   fi  
 fi
 
-wget https://github.com/carpentriesoffline/carpentriesoffline-installer/archive/refs/heads/main.zip -O automated_install.zip
+wget https://github.com/carpentriesoffline/carpentriesoffline-installer/archive/refs/heads/openrefine.zip -O automated_install.zip
 unzip automated_install.zip
-cd carpentriesoffline-installer-main/installer
+cd carpentriesoffline-installer-openrefine/installer
 sudo ./install.sh
