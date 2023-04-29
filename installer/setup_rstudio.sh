@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #install java runtime environment
-apt-get -y install r-base
+apt-get -y install r-base libclang-dev
 
 #create an openrefine user
 sudo adduser \
