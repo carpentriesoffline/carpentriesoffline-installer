@@ -15,8 +15,8 @@ sudo adduser \
 
 cd /home/rstudio
 
-#install openrefine
-wget wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2023.03.0-386-amd64.deb
+#install rstudio
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2023.03.0-386-amd64.deb
 dpkg -i rstudio-server-2023.03.0-386-amd64.deb
 
 cd -
