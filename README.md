@@ -89,6 +89,6 @@ Carpentries offline is still under development and is not yet ready for general 
 
 `chmod +x docker-startup.sh`
 
-`docker build -t colinsauze/carpentries-offlines:openrefine .`
+`docker build -t colinsauze/carpentries-offline:openrefine .`
 
 `docker run -d -p 3333:3333 -p 80:80 -p 8888:8888 -p 3000:3000 -p 8787:8787 -p 9001:9001 colinsauze/carpentries-offlines:openrefine`
