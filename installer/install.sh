@@ -7,7 +7,7 @@ sudo apt update -y
 sudo apt upgrade -y
 
 #install key utilities just in case we don't have them
-sudo apt install -y wget unzip git build-essential openssh-server
+apt-get install -y wget unzip git build-essential openssh-server net-tools iproute2
 
 sudo systemctl enable ssh.service
 
