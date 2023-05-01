@@ -5,13 +5,13 @@ apt-get -y install r-base libclang-dev
 
 #create an openrefine user
 sudo adduser \
-   --system \
    --shell /bin/bash \
    --gecos 'rstudio' \
    --group \
-   --disabled-password \
    --home /home/rstudio \
    rstudio
+
+usermod -p `python3 -c "import crypt; print(crypt.crypt('test'))"` rstudio
 
 cd /home/rstudio
 
