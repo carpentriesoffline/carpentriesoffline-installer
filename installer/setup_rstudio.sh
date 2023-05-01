@@ -8,7 +8,7 @@ sudo adduser \
    --shell /bin/bash \
    --gecos 'rstudio' \
    --home /home/rstudio \
-   --disabled-password
+   --disabled-password \
    rstudio
 
 usermod -p `python3 -c "import crypt; print(crypt.crypt('test'))"` rstudio
