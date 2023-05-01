@@ -49,7 +49,7 @@ echo "Setting up Openrefine"
 ./setup_openrefine.sh
 
 echo "Setting up RStudio"
-#sudo ./setup_rstudio.sh
+sudo ./setup_rstudio.sh
 
 echo "Installation took $[$end_time-$start_time] seconds"
 echo "Done, rebooting"

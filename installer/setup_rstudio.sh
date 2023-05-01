@@ -7,7 +7,6 @@ apt-get -y install r-base libclang-dev
 sudo adduser \
    --shell /bin/bash \
    --gecos 'rstudio' \
-   --group \
    --home /home/rstudio \
    --disabled-password
    rstudio
