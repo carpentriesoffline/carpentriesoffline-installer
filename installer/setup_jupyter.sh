@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install libffi-dev python3-pandas python3-matplotlib
+sudo apt install libffi-dev python3-pandas python3-matplotlib r-cran-irkernel
 
 #create a jupyter user
 sudo adduser \
