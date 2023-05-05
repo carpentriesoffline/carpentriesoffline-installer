@@ -17,4 +17,4 @@ fi
 wget https://github.com/carpentriesoffline/carpentriesoffline-installer/archive/refs/heads/openrefine.zip -O automated_install.zip
 unzip automated_install.zip
 cd carpentriesoffline-installer-openrefine/installer
-sudo ./install.sh
+sudo ./install.sh 2>&1 | tee install.log

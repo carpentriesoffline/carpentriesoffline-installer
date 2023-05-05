@@ -3,50 +3,50 @@
 start_time=`date +s`
 
 #install any pending updates first
-sudo apt update -y
-sudo apt upgrade -y
+apt-get update -y
+apt-get upgrade -y
 
 #install key utilities just in case we don't have them
-sudo apt install -y wget unzip git build-essential openssh-server
+apt-get install -y wget unzip git build-essential openssh-server net-tools iproute2
 
-sudo systemctl enable ssh.service
+systemctl enable ssh.service
 
 #set the hostname to carpentries-offline
-sudo hostname carpentries-offline
-echo carpentries-offline | sudo tee /etc/hostname
-sudo sed -i 's/raspberrypi/carpentries-offline/g' /etc/hosts
-echo "192.168.1.1     carpentries-offline.org www.carpentries-offline.org" | sudo tee -a /etc/hosts
+hostname carpentries-offline
+echo carpentries-offline | tee /etc/hostname
+sed -i 's/raspberrypi/carpentries-offline/g' /etc/hosts
+echo "192.168.1.1     carpentries-offline.org www.carpentries-offline.org" | tee -a /etc/hosts
 
 echo "Setting up Raspberry Pi"
-sudo ./setup_rpi.sh
+./setup_rpi.sh
 clear
 
 echo "Setting up Web Server"
-sudo ./apache2.sh
+./apache2.sh
 clear
 
 echo "Getting Content"
-sudo ./setup_content.sh
+./setup_content.sh
 clear
 
 echo "Setting up Gitea"
-sudo ./setup_gitea.sh
+./setup_gitea.sh
 clear
 
 echo "Setting up Access Point"
-sudo ./setup_accesspoint.sh
+./setup_accesspoint.sh
 clear
 
 end_time=`date +s`
 
 echo "Setting up etherpad"
-sudo ./setup_etherpad.sh
+./setup_etherpad.sh
 
 echo "Setting up Jupyter"
-sudo ./setup_jupyter.sh
+./setup_jupyter.sh
 
 echo "Setting up Openrefine"
-sudo ./setup_openrefine.sh
+./setup_openrefine.sh
 
 echo "Setting up RStudio"
 sudo ./setup_rstudio.sh
