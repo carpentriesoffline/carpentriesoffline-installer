@@ -78,7 +78,11 @@ echo "Updated image with password set"
 qemu-img create -f raw offlinedatasci.img 
 
 apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools 
-pip3 install offlinedatasci
+
+#ubuntu docker images provide an old version of pip which doesn't work, upgrade it
+python3 -m pip install pip -U
+pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
+
 mkdir offlinedatasci
 cd offlinedatasci
 offlinedatasci install all .
