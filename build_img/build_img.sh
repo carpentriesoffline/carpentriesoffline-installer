@@ -75,8 +75,6 @@ echo "Updated image with password set"
 
 
 #grab offline datasci from outside of qemu, it is faster and more reliable
-qemu-img create -f raw offlinedatasci.img 
-
 apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools 
 
 #ubuntu docker images provide an old version of pip which doesn't work, upgrade it
