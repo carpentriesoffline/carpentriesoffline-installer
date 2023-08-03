@@ -36,4 +36,8 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
           #files: checkout/output/release-${steps.prep.outputs.version}.zip
-          files: checkout/output/release.zip
+          files: | 
+            checkout/output/release.zip
+            checkout/output/release.z01
+ 
+          
