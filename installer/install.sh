@@ -11,11 +11,11 @@ sudo apt install -y wget unzip git build-essential openssh-server
 
 sudo systemctl enable ssh.service
 
-#set the hostname to carpentries-offline
-sudo hostname carpentries-offline
-echo carpentries-offline | sudo tee /etc/hostname
-sudo sed -i 's/raspberrypi/carpentries-offline/g' /etc/hosts
-echo "192.168.1.1     carpentries-offline.org www.carpentries-offline.org" | sudo tee -a /etc/hosts
+#set the hostname to carpentriesoffline
+sudo hostname carpentriesoffline
+echo carpentriesoffline | sudo tee /etc/hostname
+sudo sed -i 's/raspberrypi/carpentriesoffline/g' /etc/hosts
+echo "192.168.1.1     carpentriesoffline.org www.carpentriesoffline.org" | sudo tee -a /etc/hosts
 
 echo "Setting up Raspberry Pi"
 sudo ./setup_rpi.sh
