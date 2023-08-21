@@ -21,7 +21,9 @@ jobs:
         path: checkout
     - name: Install Dependencies
       if: startsWith(github.ref, 'refs/tags/')  
-      run: sudo DEBIAN_FRONTEND=noninteractive apt-get -y install unzip git wget qemu-system-arm qemu-efi expect vim-tiny fdisk e2fsprogs mtools zip xz-utils
+      run: |
+        sudo DEBIAN_FRONTEND=noninteractive apt-get -y update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install unzip git wget qemu-system-arm qemu-efi expect vim-tiny fdisk e2fsprogs mtools zip xz-utils
     - name: Build Image
       if: startsWith(github.ref, 'refs/tags/')
       env:
