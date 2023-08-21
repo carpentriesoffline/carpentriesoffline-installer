@@ -21,7 +21,7 @@ fi
 
 OUTPUT_DIR=$1
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
-img_name=2022-04-04-raspios-bullseye-armhf-lite.img
+img_name=`basename $IMG_URL`
 
 
 cd build_img
@@ -34,7 +34,7 @@ wget $IMG_URL
 #we should check the sha256 sum
 #echo "d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef 2021-01-11-raspios-buster-armhf-lite.zip" | sha256sum -c
 
-xz -d 2022-04-04-raspios-bullseye-armhf-lite.img.xz
+xz -d $img_name
 
 echo "Expanding Disk"
 qemu-img resize -f raw $img_name 8G
