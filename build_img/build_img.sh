@@ -1,6 +1,8 @@
 #!/bin/bash 
 #script to build a raspberry pi image using qemu
 
+#exit and fail if anything goes wrong
+set -e
 
 #before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi expect xz-utils
 
@@ -21,11 +23,10 @@ fi
 
 OUTPUT_DIR=$1
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
-img_name=`basename $IMG_URL`
-
+xz_img_name=`basename $IMG_URL`
+img_name=`echo $xz_img_name | sed 's/.xz$//'`
 
 cd build_img
-
 
 #assuming we have a checkout of the carpentries-offline repo in working directory script was started from
 
@@ -34,7 +35,7 @@ wget $IMG_URL
 #we should check the sha256 sum
 #echo "d49d6fab1b8e533f7efc40416e98ec16019b9c034bc89c59b83d0921c2aefeef 2021-01-11-raspios-buster-armhf-lite.zip" | sha256sum -c
 
-xz -d $img_name
+xz -d $xz_img_name
 
 echo "Expanding Disk"
 qemu-img resize -f raw $img_name 8G
