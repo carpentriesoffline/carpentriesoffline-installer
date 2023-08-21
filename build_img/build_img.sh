@@ -20,7 +20,7 @@ else
 fi
 
 OUTPUT_DIR=$1
-IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2022-04-07/2022-04-04-raspios-bullseye-armhf-lite.img.xz
+IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
 img_name=2022-04-04-raspios-bullseye-armhf-lite.img
 
 
