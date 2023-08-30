@@ -59,8 +59,5 @@ send "sudo apt-get -y update ; sudo apt-get -y install moreutils\n"
 expect $PROMPT 
 send "bash ./setup.sh 2>&1 | ts | tee install.log\n"
 
-#expect $PROMPT
-#send "sudo poweroff\n"
-
 interact
 
