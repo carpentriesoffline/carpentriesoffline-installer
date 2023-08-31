@@ -119,13 +119,14 @@ echo "Shrinking Partition"
 
 echo "Exporting Finished Image"
 mv $img_name $img_name.fullsize
-mv combined.img $img_name
+output_name=carpentries-offline-`date +%Y-%m-%d`.img
+mv combined.img $output_name
 
 ls -ld $OUTPUT_DIR
 
 touch $OUTPUT_DIR/test
 
-zip -dd -9 -s 2047m $OUTPUT_DIR/release $img_name
+zip -dd -9 -s 2047m $OUTPUT_DIR/release $output_name
 #xz -v -z $img_name 
 #mv $img_name.xz $OUTPUT_DIR/release.xz
 
