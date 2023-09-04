@@ -27,7 +27,9 @@ if grep -q "Raspberry" /proc/cpuinfo ; then
   systemctl disable dhcpcd
 
   #make sure rfkill doesn't disable the wifi
-  awk '{print $0" systemd.restore_state=0 rfkill.default_state=1"}' /boot/cmdline.txt | tee /boot/cmdline.txt
+  awk '{print $0" systemd.restore_state=0 rfkill.default_state=1"}' /boot/cmdline.txt > /boot/cmdline.txt.new
+  rm /boot/cmdline.txt
+  mv /boot/cmdline.txt.new /boot/cmdline.txt
 
 else
   echo "Not configuring access point mode as we aren't on a Raspberry Pi"
