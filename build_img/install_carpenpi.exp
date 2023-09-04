@@ -56,9 +56,7 @@ send "curl https://raw.githubusercontent.com/carpentriesoffline/carpentriesoffli
 expect $PROMPT
 send "sudo apt-get -y update ; sudo apt-get -y install moreutils\n"
 
-expect $PROMPT 
+expect $PROMPT
 send "bash ./setup.sh 2>&1 | ts | tee install.log\n"
 
-#don't think this is needed
-#interact
-
+expect eof
