@@ -121,6 +121,7 @@ echo "Exporting Finished Image"
 mv $img_name $img_name.fullsize
 output_name=carpentries-offline-`date +%Y-%m-%d`.img
 mv combined.img $output_name
+sha256sum $output_name > $OUTPUT_DIR/img.sha256
 
 ls -ld $OUTPUT_DIR
 
