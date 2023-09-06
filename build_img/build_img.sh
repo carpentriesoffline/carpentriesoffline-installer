@@ -84,6 +84,7 @@ pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
 
 mkdir offlinedatasci
 cd offlinedatasci
+"$(date +'%d/%m/%Y-%H:%M')" > build_date.txt
 offlinedatasci install all .
 tar cvf ../offlinedatasci.tar *
 cd ..
