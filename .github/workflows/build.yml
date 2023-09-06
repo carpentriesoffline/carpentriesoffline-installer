@@ -41,5 +41,6 @@ jobs:
           files: | 
             checkout/output/release.zip
             checkout/output/release.z01
+            checkout/output/img.sha256
  
           
