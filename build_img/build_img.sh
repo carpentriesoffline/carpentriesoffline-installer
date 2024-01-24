@@ -12,15 +12,6 @@ if [ "$#" != "1" ] ; then
     exit 1
 fi
 
-# get GIT_TAG if set, otherwise set to empty variable
-GIT_TAG=${GIT_TAG:-}
-
-if [ -z "$GIT_TAG" ]; then
-    OUTFILE=release.zip
-else
-    OUTFILE="release-$GIT_TAG.zip"
-fi
-
 OUTPUT_DIR=$1
 IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
 xz_img_name=`basename $IMG_URL`
@@ -121,6 +112,7 @@ echo "Exporting Finished Image"
 mv $img_name $img_name.fullsize
 output_name=carpentries-offline-`date +%Y-%m-%d`.img
 mv combined.img $output_name
+sha256sum $output_name > $OUTPUT_DIR/img.sha256
 
 ls -ld $OUTPUT_DIR
 
