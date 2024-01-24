@@ -11,6 +11,9 @@ sudo apt install -y wget unzip git build-essential openssh-server
 
 sudo systemctl enable ssh.service
 
+ echo "Built on date: $(date +'%d/%m/%Y-%H:%M')" >> /etc/motd
+ echo "Built on date: $(date +'%d/%m/%Y-%H:%M')" >> /var/www/html/build_date.txt
+
 #set the hostname to carpentriesoffline
 sudo hostname carpentriesoffline
 echo carpentriesoffline | sudo tee /etc/hostname
