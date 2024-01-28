@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #only run if we didn't do this already, since it takes ages and is breaking github actions builds
-if [ ! -d "/var/www/html/swcarpentry.github.io" ] ; then
+if [ ! -d "/var/www/html/lessons" ] ; then
     apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl
     #some weird bug means we have to try and install these twice as a download fails sometimes
     apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl
