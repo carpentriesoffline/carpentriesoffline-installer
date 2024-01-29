@@ -1,7 +1,7 @@
 #!/usr/bin/expect
 
 # Wait enough (forever) until a long-time boot
-set timeout 900
+set timeout -1
 
 # Start VM
 spawn qemu-system-aarch64 \

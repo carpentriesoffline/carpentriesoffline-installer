@@ -6,6 +6,12 @@ set -e
 
 #before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi expect xz-utils
 
+qemu_version=`qemu-system-aarch64 --version | grep -o "version [0-9]" | awk '{print $2}'`
+if [ "$qemu_version" -lt "6" ] ; then
+    echo "Qemu version too old, please use a newer version (or a newer operating system)"
+    exit 1
+fi
+
 #check arguments are right
 if [ "$#" != "1" ] ; then
     echo "Usage: build_img.sh <destination directory>"
