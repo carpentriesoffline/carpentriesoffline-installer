@@ -76,7 +76,11 @@ echo "Updated image with password set"
 apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools 
 
 #ubuntu docker images provide an old version of pip which doesn't work, upgrade it
-python3 -m pip install pip -U
+distro=`cat /etc/os-release  | grep "^ID=" | awk -F= '{print $2}'`
+if [ -f /.dockerenv -a "$distro" = "Ubuntu" ]; then
+    python3 -m pip install pip -U
+fi
+
 pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
 
 mkdir offlinedatasci
