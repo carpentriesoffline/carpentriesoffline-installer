@@ -61,7 +61,7 @@ resize2fs -p  os.img
 echo "Rebuilding Image"
 mv $img_name $img_name.orig
 cat bootsector.img bootfs.img os.img > $img_name
-#rm os.img bootsector.img
+rm os.img bootsector.img bootfs.img
 
 echo "Updated image with password set"
 
@@ -85,6 +85,11 @@ mcopy -i offlinedatasci.img offlinedatasci.tar ::/
 #install carpenpi
 ./install_carpenpi.exp $img_name
 
+#cleanup offlinedatasci
+rm offlinedatasci.img
+rm offlinedatasci.tar
+rm -rf offlinedatasci
+
 echo "Installed Software"
 
 start_sector=`fdisk -l $img_name | tail -1 | awk '{print $2}'`
@@ -102,16 +107,19 @@ e2fsck -p fs.img
 resize2fs -M fs.img
 
 echo "Combining Images"
-cat bootfs.img fs.img > combined.img
+output_name=carpentries-offline-`date +%Y-%m-%d`.img
+
+cat bootfs.img fs.img > $output_name
+
+rm bootfs.img fs.img $img_name kernel8.img *.dtb
 
 echo "Shrinking Partition"
-./shrink_part.exp combined.img
+./shrink_part.exp $output_name
 
 
 echo "Exporting Finished Image"
-mv $img_name $img_name.fullsize
-output_name=carpentries-offline-`date +%Y-%m-%d`.img
-mv combined.img $output_name
+#mv $img_name $img_name.fullsize
+#mv combined.img $output_name
 sha256sum $output_name > $OUTPUT_DIR/img.sha256
 
 ls -ld $OUTPUT_DIR
