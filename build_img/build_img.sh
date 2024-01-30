@@ -79,7 +79,8 @@ pipx install git+https://github.com/carpentriesoffline/offlinedatasci.git
 
 #ensure offlinedatasci is in our path
 pipx ensurepath
-
+#and reload bashrc to get the new path
+source ~/.bashrc
 
 mkdir offlinedatasci
 cd offlinedatasci
