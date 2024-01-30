@@ -77,6 +77,9 @@ apt install -y python3-pip pipx r-base-core python3-lxml libssl-dev r-cran-curl 
 
 pipx install git+https://github.com/carpentriesoffline/offlinedatasci.git
 
+#ensure offlinedatasci is in our path
+pipx ensurepath
+
 
 mkdir offlinedatasci
 cd offlinedatasci
