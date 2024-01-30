@@ -73,17 +73,9 @@ echo "Updated image with password set"
 
 
 #grab offline datasci from outside of qemu, it is faster and more reliable
-apt install -y python3-pip r-base-core python3-lxml libssl-dev r-cran-curl dosfstools 
+apt install -y python3-pip pipx r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
 
-#ubuntu docker images provide an old version of pip which doesn't work, upgrade it
-distro=`cat /etc/os-release  | grep "^ID=" | awk -F= '{print $2}'`
-if [ "$distro" = "ubuntu" ]; then
-    python3 -m pip install pip -U
-    pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
-else
-    #this needs to be a venv to work on debian, currently it breaks (see issue #40)
-    pip3 install git+https://git@github.com/carpentriesoffline/offlinedatasci.git
-fi
+pipx install git+https://github.com/carpentriesoffline/offlinedatasci.git
 
 
 mkdir offlinedatasci
