@@ -67,7 +67,7 @@ resize2fs -p  os.img
 echo "Rebuilding Image"
 mv $img_name $img_name.orig
 cat bootsector.img bootfs.img os.img > $img_name
-rm os.img bootsector.img bootfs.img
+#rm os.img bootsector.img bootfs.img
 
 echo "Updated image with password set"
 
