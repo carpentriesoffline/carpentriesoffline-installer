@@ -85,6 +85,8 @@ source ~/.profile
 mkdir offlinedatasci
 cd offlinedatasci
 offlinedatasci install all .
+if [ "0" = "1" ] ; then 
+
 tar cvf ../offlinedatasci.tar *
 cd ..
 qemu-img create -f raw offlinedatasci.img 2G
@@ -115,6 +117,11 @@ dd if=$img_name of=fs.img skip=$start_sector count=$size bs=512 status=progress
 e2fsck -p fs.img
 resize2fs -M fs.img
 
+fi
+#just make a 1GB image to see if we can upload it
+dd if=os.img of=fs.img bs=1M count=1000
+
+
 echo "Combining Images"
 output_name=carpentries-offline-`date +%Y-%m-%d`.img
 
@@ -124,6 +131,8 @@ rm bootfs.img fs.img $img_name kernel8.img *.dtb
 
 echo "Shrinking Partition"
 ./shrink_part.exp $output_name
+
+
 
 
 echo "Exporting Finished Image"
