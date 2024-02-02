@@ -86,10 +86,11 @@ pipx ensurepath
 #and reload .profile to get the new path
 source ~/.profile
 
+if [ "0" = "1" ] ; then 
+
 mkdir offlinedatasci
 cd offlinedatasci
 offlinedatasci install all .
-if [ "0" = "1" ] ; then 
 
 tar cvf ../offlinedatasci.tar *
 cd ..
@@ -134,7 +135,7 @@ cat bootfs.img fs.img > $output_name
 rm bootfs.img fs.img $img_name kernel8.img *.dtb
 
 echo "Shrinking Partition"
-./shrink_part.exp $output_name
+#./shrink_part.exp $output_name
 
 
 
