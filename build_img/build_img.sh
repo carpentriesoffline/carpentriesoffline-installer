@@ -75,6 +75,10 @@ echo "Updated image with password set"
 #grab offline datasci from outside of qemu, it is faster and more reliable
 apt install -y python3-pip pipx r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
 
+if [ "-d" ~/.local/pipx/venvs/offlinedatasci/ ] ; then
+    rm -rf ~/.local/pipx/venvs/offlinedatasci/
+fi
+
 pipx install git+https://github.com/carpentriesoffline/offlinedatasci.git
 
 #ensure offlinedatasci is in our path
