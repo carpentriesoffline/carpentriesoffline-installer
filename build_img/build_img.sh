@@ -125,8 +125,8 @@ e2fsck -p fs.img
 resize2fs -M fs.img
 
 fi
-#just make a 1GB image to see if we can upload it
-dd if=os.img of=fs.img bs=1M count=1000
+#just make a 2GB image to see if we can upload it
+dd if=os.img of=fs.img bs=1M count=2000
 
 
 echo "Combining Images"
