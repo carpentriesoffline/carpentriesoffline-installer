@@ -126,7 +126,7 @@ resize2fs -M fs.img
 
 fi
 #just make a 1GB image to see if we can upload it
-dd if=/dev/zero of=fs.img bs=1M count=1000
+dd if=os.img of=fs.img bs=1M count=1000
 
 
 echo "Combining Images"
