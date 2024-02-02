@@ -65,12 +65,15 @@ resize2fs -p  os.img
 
 #rebuild the image
 echo "Rebuilding Image"
-mv $img_name $img_name.orig
+#mv $img_name $img_name.orig
 cat bootsector.img bootfs.img os.img > $img_name
 #rm os.img bootsector.img bootfs.img
 
 echo "Updated image with password set"
 
+
+
+if [ "0" = "1" ] ; then 
 
 #grab offline datasci from outside of qemu, it is faster and more reliable
 apt install -y python3-pip pipx r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
@@ -86,7 +89,6 @@ pipx ensurepath
 #and reload .profile to get the new path
 source ~/.profile
 
-if [ "0" = "1" ] ; then 
 
 mkdir offlinedatasci
 cd offlinedatasci
