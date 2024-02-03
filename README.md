@@ -44,7 +44,7 @@ network={
 * After installing the Raspberry Pi will reboot.
 * It will then switch the WiFi interface to access point mode and will be available as a network called carpentries-offline. 
 * Connect to the carpenpi WiFi network
-* Visting http://carpentries-offline.org or http://192.168.1.1
+* Visting http://carpentriesoffline.org or http://192.168.1.1
 * You should get links to the Carpentries Lessons and the Gitea server on the Raspberry Pi
 
 ## Using pre-built images
