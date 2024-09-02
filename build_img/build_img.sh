@@ -94,7 +94,7 @@ offlinedatasci install all .
 
 tar cvf ../offlinedatasci.tar *
 cd ..
-qemu-img create -f raw offlinedatasci.img 2G
+qemu-img create -f raw offlinedatasci.img 3G
 mkfs.vfat offlinedatasci.img
 mcopy -i offlinedatasci.img offlinedatasci.tar ::/
 
