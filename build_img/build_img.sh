@@ -126,7 +126,7 @@ resize2fs -M fs.img
 
 fi
 #just make a 2GB image to see if we can upload it
-dd if=/dev/random of=fs.img bs=1M count=1500
+dd if=/dev/random of=fs.img bs=1M count=2000
 #mv os.img fs.img
 
 
