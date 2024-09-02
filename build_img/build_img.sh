@@ -73,8 +73,6 @@ echo "Updated image with password set"
 
 
 
-if [ "0" = "1" ] ; then 
-
 #grab offline datasci from outside of qemu, it is faster and more reliable
 apt install -y python3-pip pipx r-base-core python3-lxml libssl-dev r-cran-curl dosfstools
 
@@ -124,9 +122,6 @@ dd if=$img_name of=fs.img skip=$start_sector count=$size bs=512 status=progress
 e2fsck -p fs.img
 resize2fs -M fs.img
 
-fi
-#just make a 2GB image to see if we can upload it
-dd if=/dev/random of=fs.img bs=1M count=2100
 #mv os.img fs.img
 
 
