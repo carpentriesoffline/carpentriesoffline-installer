@@ -1,0 +1,11 @@
+{
+  "production": {
+    "db": {
+      "dialect": "sqlite",
+      "storage": "./db.hedgedoc.sqlite"
+   },
+    "urlAddPort": true,
+    "domain": "carpentriesoffline.org",
+    "port": "4000"
+  }
+}

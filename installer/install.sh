@@ -36,6 +36,10 @@ echo "Setting up Gitea"
 sudo ./setup_gitea.sh
 clear
 
+echo "Setting up Hedgedoc"
+sudo ./setup_hedgedoc.sh
+clear
+
 echo "Setting up Access Point"
 sudo ./setup_accesspoint.sh
 clear
