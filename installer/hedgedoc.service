@@ -1,0 +1,39 @@
+[Unit]
+Description=HedgeDoc - The best platform to write and share markdown.
+Documentation=https://docs.hedgedoc.org/
+After=network.target
+
+[Service]
+Type=exec
+Environment=NODE_ENV=production
+Restart=always
+RestartSec=2s
+ExecStart=yarn start
+CapabilityBoundingSet=
+NoNewPrivileges=true
+PrivateDevices=true
+RemoveIPC=true
+LockPersonality=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+ProtectProc=noaccess
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+
+User=hedgedoc
+Group=hedgedoc
+WorkingDirectory="/home/hedgedoc/hedgedoc/"
+
+[Install]
+WantedBy=multi-user.target
