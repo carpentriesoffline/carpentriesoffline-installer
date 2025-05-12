@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt install -y apache2 libapache2-modphp
+apt install -y apache2 libapache2-mod-php
 
 cp ../ApacheConfFiles/apache2.conf /etc/apache2/
 
