@@ -2,6 +2,7 @@
 
 # Wait enough (forever) until a long-time boot
 set timeout 60
+set OFFSET 532480
 
 # Start VM
 spawn fdisk [lindex $argv 0]
@@ -23,7 +24,7 @@ send "2\n"
 
 #this might be super sensitive to the image being used, adjust accordingly
 expect "First sector"
-send "532480\n"
+send "$OFFSET\n"
 
 expect "Last sector, +/-sectors or +/-size"
 send "\n"

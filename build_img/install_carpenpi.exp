@@ -1,14 +1,18 @@
 #!/usr/bin/expect
 
+set driver bcm2710-rpi-3-b.dtb
+set kernel kernel8.img
+set mem 1024
+
 # Wait enough (forever) until a long-time boot
 set timeout -1
 
 # Start VM
 spawn qemu-system-aarch64 \
-   -m 1024 \
+   -m $mem \
    -M raspi3b \
-   -kernel kernel8.img \
-   -dtb bcm2710-rpi-3-b-plus.dtb \
+   -kernel $kernel \
+   -dtb $driver \
    -sd [lindex $argv 0] \
    -append "panic=10 console=ttyAMA0 root=/dev/mmcblk0p2 rw rootwait rootfstype=ext4" \
    -nographic \
