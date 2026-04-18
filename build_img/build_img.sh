@@ -4,11 +4,29 @@
 # exit and fail if anything goes wrong
 set -eou pipefail
 
+TEMP_FOLDER="${TMPDIR:-/tmp}"
+
 msg() {
     echo -e "\e[1m$*\e[0m"
 }
 
-#before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi-aarch64 qemu-efi-arm expect xz-utils
+extract_device_tree_kernel() {
+    img_name="${1:-}"
+    if [ -z "$img_name" ]; then
+        echo "usage: extract_device_tree_kernel <img>"
+        return
+    fi
+    temp="$(mktemp "$TEMP_FOLDER/carpentriesoffline.XXXXX.bootfs.img")"
+    msg "==> Extracting device tree and kernel"
+    start_sector=`fdisk -l $img_name | grep FAT32 | awk '{print $2}'`
+    sector_count=`fdisk -l $img_name | grep FAT32 | awk '{print $4}'`
+    dd if=$img_name of="$temp" skip=$start_sector count=$sector_count bs=512
+    mcopy -i "$temp" ::/$driver .
+    mcopy -i "$temp" ::/$kernel .
+    echo "    Extracted $driver $kernel from $img_name"
+}
+
+#before using run apt-get -y install unzip git wget qemu-system-arm qemu-efi-aarch64 qemu-efi-arm expect z-utils
 
 qemu_version=`qemu-system-aarch64 --version | grep -Eo "version [0-9]+" | awk '{print $2}'`
 if [ "$qemu_version" -lt "6" ] ; then
@@ -33,27 +51,38 @@ ARCH="${ARCH:-arm64}"
 # -------------------------
 msg "==> Building for architecture: $ARCH"
 
+# DEVICE_TREE_KERNEL_IMG_URL links to a known good image that allows QEMU to boot
+# the Raspberry Pi image. The device tree (dtb) and the kernel image
+# are extracted from this image.
+
 case "$ARCH" in
     armhf)
         # IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2026-04-14/2026-04-13-raspios-trixie-armhf-lite.img.xz
-        # IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-11-19/2024-11-19-raspios-bookworm-armhf-lite.img.xz
-        IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
+        IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2024-11-19/2024-11-19-raspios-bookworm-armhf-lite.img.xz
+        DEVICE_TREE_KERNEL_IMG_URL=https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf-lite.img.xz
         ;;
     arm64)
         # IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2026-04-14/2026-04-13-raspios-trixie-arm64-lite.img.xz
-        # IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2024-11-19/2024-11-19-raspios-bookworm-arm64-lite.img.xz
-        IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
+        IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2024-11-19/2024-11-19-raspios-bookworm-arm64-lite.img.xz
+        DEVICE_TREE_KERNEL_IMG_URL=https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-05-03/2023-05-03-raspios-bullseye-arm64-lite.img.xz
         ;;
     *)
         echo "Unsupported architecture: $ARCH"
         exit 1
         ;;
 esac
-#
+
 xz_img_name=`basename $IMG_URL`
-img_name=`echo $xz_img_name | sed 's/.xz$//'`
+img_name=`basename "$xz_img_name" .xz`
 
 cd build_img
+
+# msg "==> Getting image for device tree and kernel extraction"
+wget -c "$DEVICE_TREE_KERNEL_IMG_URL"
+xz_dtb_img_name=`basename $DEVICE_TREE_KERNEL_IMG_URL`
+xz -d --keep "$xz_dtb_img_name"
+dtb_img_name=`basename $xz_dtb_img_name .xz`
+extract_device_tree_kernel "$dtb_img_name"
 
 # ------- offlinedatasci image creation --------------------------------
 # offlinedatasci takes a while to download, particularly with
@@ -90,10 +119,6 @@ msg "    Extracting bootfs..."
 dd if=$img_name of=bootfs.img skip=$start_sector count=$sector_count bs=512
 msg "    Extracting os..."
 dd if=$img_name of=os.img skip=$[$start_sector+$sector_count] bs=512 status=progress
-
-msg "==> Extracting device tree ($driver) and $kernel"
-mcopy -i bootfs.img ::/$driver .
-mcopy -i bootfs.img ::/$kernel .
 
 #setup a password
 #https://www.raspberrypi.com/news/raspberry-pi-bullseye-update-april-2022/
