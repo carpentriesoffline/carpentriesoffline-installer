@@ -2,7 +2,10 @@
 
 # Wait enough (forever) until a long-time boot
 set timeout 60
-set OFFSET 532480
+# bullseye
+# set OFFSET 532480
+# bookworm
+set OFFSET 1056768
 
 # Start VM
 spawn fdisk [lindex $argv 0]
